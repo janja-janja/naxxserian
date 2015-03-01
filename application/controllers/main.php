@@ -4,13 +4,18 @@ class Main extends CI_Controller {
 
 
 	public function index()
-	{
-		$this->login();
+	{	//if session is active, redirect to members area
+		!$this->session->userdata('is_logged_in') ? $this->login() : redirect('main/members');
+	
 	}
 
 	/*Login form*/
 	public function login(){
-		$this->load->view('login');
+		!$this->session->userdata('is_logged_in') ? $this->load->view('login'): redirect('main/members');
+	}
+
+	public function signup(){
+		$this->load->view('signup');
 	}
 
 
@@ -34,6 +39,24 @@ class Main extends CI_Controller {
 		else
 		{
 			$this->load->view('login');
+		}
+	}
+
+	public function signup_validation()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('id_number', 'ID number', 'required|trim|xss_clean|is_unique[members.id_number]');
+		$this->form_validation->set_rules('password', 'Password', 'required|trim');
+		$this->form_validation->set_rules('conf_password', 'Confirm password', 'required|trim|matches[password]');
+
+		if ($this->form_validation->run())
+		{
+			echo"Pass :)";
+		}
+		else
+		{
+			echo "Denied bro";
+			$this->load->view('signup');
 		}
 	}
 
