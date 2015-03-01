@@ -15,7 +15,7 @@ class Main extends CI_Controller {
 	}
 
 	public function signup(){
-		$this->load->view('signup');
+		!$this->session->userdata('is_logged_in') ? $this->load->view('signup'): redirect('main/members');
 	}
 
 
