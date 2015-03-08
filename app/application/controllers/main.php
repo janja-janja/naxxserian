@@ -19,7 +19,7 @@ class Main extends CI_Controller {
 
 	/*Login form*/
 	public function login(){
-		$data = 'login'
+		
 		!$this->session->userdata('is_logged_in') ? $this->load->view('login'): redirect('main/members');
 	}
 
