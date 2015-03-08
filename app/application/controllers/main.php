@@ -6,6 +6,8 @@ class Main extends CI_Controller {
 	public function index()
 	{	//if session is active, redirect to members area
 		!$this->session->userdata('is_logged_in') ? $this->login() : redirect('main/members');
+		$this->load->model('model_users');
+		echo $this->model_users->date_difference();
 	
 	}
 
