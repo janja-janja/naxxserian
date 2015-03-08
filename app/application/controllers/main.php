@@ -1,18 +1,25 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Main extends CI_Controller {
+	private $data;
 
+	function __construct(){
+		parent::__construct();
+
+		$this->load->view('inc/template');
+		$this->load->model('model_users');
+	}
 
 	public function index()
 	{	//if session is active, redirect to members area
 		!$this->session->userdata('is_logged_in') ? $this->login() : redirect('main/members');
-		$this->load->model('model_users');
-		echo $this->model_users->date_difference();
+		
 	
 	}
 
 	/*Login form*/
 	public function login(){
+		$data = 'login'
 		!$this->session->userdata('is_logged_in') ? $this->load->view('login'): redirect('main/members');
 	}
 
