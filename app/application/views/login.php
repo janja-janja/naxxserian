@@ -1,6 +1,13 @@
 
-<h3>Please login...</h3>
-<div class="nax-login">
+
+<div class="jumbotron">
+
+	<h2>
+		Naxxserian Investment members validation point.
+	</h2>
+
+</div>
+<div class="col-md well">
 	<?php
 		echo form_open('main/login_validation');
 		echo validation_errors();

@@ -6,6 +6,7 @@ class Main extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 
+		#load views and models on startup
 		$this->load->view('inc/template');
 		$this->load->model('model_users');
 	}
