@@ -2,7 +2,8 @@
 
 <div class="jumbotron">
 
-	<h2>
+	<i class="fa fa-gavel fa-5x nax-header"></i>
+	<h2 class="nax-header">
 		Naxxserian Investment members validation point.
 	</h2>
 
