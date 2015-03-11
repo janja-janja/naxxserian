@@ -30,7 +30,7 @@ class Main extends CI_Controller {
 
 
 	/*
-	*Create the login logic. Login User
+	*Validate log ins
 	*/
 	public function login_validation(){
 		$this->load->library('form_validation');
@@ -52,6 +52,7 @@ class Main extends CI_Controller {
 		}
 	}
 
+	/*Validate sign ups*/
 	public function signup_validation()
 	{
 		$this->load->library('form_validation');
