@@ -66,7 +66,7 @@ class Main extends CI_Controller {
 		}
 		else
 		{
-			echo "Denied bro";
+			echo "<span class='alert alert-error'>Couldn't sign you up.</span>";
 			$this->load->view('signup');
 		}
 	}
