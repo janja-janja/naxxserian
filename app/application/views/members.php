@@ -1,4 +1,5 @@
 
+<!-- Members intial point in the system. Their profile -->
 <h3>Members area.</h3>
 <div class="nax-login">
 	<?php
