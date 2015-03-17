@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand nax-header" href="#">Naxxserian Investment</a>
+      <a class="navbar-brand nax-header" href="<?php echo base_url();?>main/home">Naxxserian Investment</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,15 +44,14 @@
         <li><a href="#">Gallery</a></li>
         <li><a href="#">Foundation</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Ongoing</a></li>
             <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="#">Completed</a></li>
             <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">Pending</a></li>
+            
           </ul>
         </li>
       </ul>
@@ -67,18 +66,20 @@
       <!-- End of search -->
 
       
+      <?php 
+
+        if(!$this->session->userdata('is_logged_in'))
+        {
+          $login = "<a href=".base_url()."main/login>Login</a>";
+        }
+        else
+        {
+          $login = "<a href=".base_url()."main/logout>Logout</a>";
+        }
+       ?>
+
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo(base_url());?>main/login">Login</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+        <li><?php echo $login; ?></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

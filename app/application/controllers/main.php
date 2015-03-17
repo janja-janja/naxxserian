@@ -12,10 +12,14 @@ class Main extends CI_Controller {
 	}
 
 	public function index()
-	{	//if session is active, redirect to members area
-		!$this->session->userdata('is_logged_in') ? $this->login() : redirect('main/members');
+	{
+		$this->load->view("home");
 		
-	
+	}
+
+	public function home()
+	{
+		$this->load->view("home");
 	}
 
 	/*Login form*/
@@ -71,9 +75,13 @@ class Main extends CI_Controller {
 		}
 	}
 
+	public function reset_password()
+	{	
+		$this->load->view("reset_password");
+	}
+
 	//callback function to validate usernames and passwords
 	public function validate_credentials(){
-		$this->load->model('model_users');
 
 		if ($this->model_users->can_log_in()){
 			return true;
@@ -102,7 +110,7 @@ class Main extends CI_Controller {
 	//logout member.
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect('main/login');
+		redirect('main/home');
 	}
 
 
