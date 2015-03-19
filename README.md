@@ -1,2 +1,2 @@
-# naxxserian
-A chama managind web app.
+# Naxxserian Investment Enterprise
+A chama management web app.
