@@ -12,11 +12,6 @@
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
      <link href="<?php echo base_url();?>assets/css/naxxserian.css" rel="stylesheet">
-    <?php
-    if(isset($date_picker)):
-    ?>
-    <link href="<?php echo base_url();?>assets/css/datepicker.css" rel="stylesheet">
-    <?php endif; ?>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -69,9 +64,9 @@
       <?php 
 
         if(!$this->session->userdata('is_logged_in'))
-          $login = "<a class='white'href=".base_url()."main/login><strong>Login</strong></a>";
+          $login = "<a style='color:white;' class='white'href=".base_url()."main/login><strong>Login</strong><i class='fa fa-lock'></i></a>";
         else
-          $login = "<a class='white'href=".base_url()."main/logout><strong>Logout</strong></a>";
+          $login = "<a style='color:white;'class='white'href=".base_url()."main/logout><strong>Logout</strong><i class='fa fa-sign-out'></i></a>";
        ?>
 
       <ul class="nav navbar-nav navbar-right">
