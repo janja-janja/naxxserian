@@ -39,6 +39,14 @@ class Main extends CI_Controller {
 
 	}
 
+	public function about()
+	/*
+	About the app / organisation
+	*/
+	{
+		$this->load->view("about");
+	}
+
 	private function array_to_single($array, $column)
 	/*
 	Array to  single value
