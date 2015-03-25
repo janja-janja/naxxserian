@@ -55,6 +55,30 @@ class Main extends CI_Controller {
 		$this->load->view("gallery");
 	}
 
+	public function projects()
+	/*
+	Naxxserian projects:
+	 Completed, ongoing and pending
+	*/
+	{
+		/*Completed projects*/
+		#load model, completed projects from db
+		#load completed projects view here
+
+
+		/*Ongoing projects*/
+		#load model, ongoing projects from db
+		#load ongoing projects view here
+
+
+		/*Pending projects*/
+		#load model, pending projects from db
+		#load pending projects view here
+
+
+		
+	}
+
 	private function array_to_single($array, $column)
 	/*
 	Array to  single value
