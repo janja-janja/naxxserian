@@ -7,7 +7,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		#load views and models on startup
-		$this->load->view('inc/template');
+		#$this->load->view('inc/template');
 		$this->load->model('model_users');
 	}
 
@@ -19,7 +19,29 @@ class Main extends CI_Controller {
 
 	public function home()
 	{
-		$this->load->view("home");
+		#$this->load->view("home");
+		$logged_in_member = $this->session->all_userdata()['id_number'];
+		$user_data = $this->model_users->user_details("first_name", $logged_in_member);
+		
+		if($user_data)
+		{
+			echo ucfirst($this->array_to_single($user_data, "first_name"));
+		}
+
+	}
+
+	private function array_to_single($array, $column)
+	/*
+	Array to  single value
+	$params -> array(object array from db), string(column name)
+	$return single value(int/string)
+	*/
+	{
+		foreach($array->result() as $key)
+		{
+			$value = $key->$column;
+		}
+		return $value;
 	}
 
 	/*Login form*/

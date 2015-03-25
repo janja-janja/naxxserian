@@ -2,6 +2,19 @@
 
  class Model_users extends CI_Model{
 
+ 	public function user_details($column, $unique_id)
+ 	/*
+	Get a specific field of a user
+	@params - > sting(table name), string(column), int(primary key)
+ 	*/
+ 	{
+ 		$details = $this->db->query("SELECT $column FROM members WHERE id_number = $unique_id");
+ 		if($details)
+ 		{
+ 			return $details;
+ 		}
+ 	}
+
  	public function can_log_in(){
  		$this->db->where('id_number', $this->input->post('id_number'));
  		$this->db->where('password', md5($this->input->post('password')));
