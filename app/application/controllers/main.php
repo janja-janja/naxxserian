@@ -49,7 +49,7 @@ class Main extends CI_Controller {
 				);
 			$this->session->set_userdata($data);
 			redirect('main/members');
-		}
+		} 
 		else
 		{
 			$this->load->view('login');
@@ -77,7 +77,17 @@ class Main extends CI_Controller {
 
 	public function reset_password()
 	{	
+		#load view
 		$this->load->view("reset_password");
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('email_address', 'Email address', 'required|trim|xss_clean|is_email');
+
+		if($this->form_validation->run())
+		{
+			echo"<span class='alert alert-success'>Is a valid email</span> ";
+		}
+
+
 	}
 
 	//callback function to validate usernames and passwords

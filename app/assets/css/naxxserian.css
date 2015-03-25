@@ -42,3 +42,13 @@ body{
 .offset-top-auth{
 	margin-top: 150px;
 }
+.highlighter{
+	background-color: #F15725;
+}
+li.active-inverse a.white{
+	color: #eaeaea;
+}
+
+li.active-inverse a.white:hover{
+	color: #fefefe;
+}

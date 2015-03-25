@@ -1,12 +1,11 @@
 <!--***SIGN-IN-FORM***-->
  <div class="container">
-      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>main/reset_password" id="login-form-auth">
+      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>main/reset_password">
       		<span class="text text-danger"><?php echo validation_errors(); ?></span>
 	      	
 	        <h3 class="form-signin-heading visible-desktop"><i class="fa fa-lock"></i>Reset password</h3>
 	        Email Address:
-	        <i class="fa fa-envelope fa-2x"></i>
-	        <input type="text" class="input-block-level" placeholder="Enter Email address" name="email_address" value="<?php echo($this->input->post('id_number')) ?>"/>
+	        <input type="text" class="input-block-level" placeholder="Enter Email address" name="email_address" value="<?php echo($this->input->post('email_address')) ?>"/>
 	    		
 	        <br><br>
 	        <div>
