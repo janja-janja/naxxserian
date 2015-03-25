@@ -7,7 +7,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		#load views and models on startup
-		#$this->load->view('inc/template');
+		$this->load->view('inc/template');
 		$this->load->model('model_users');
 	}
 
@@ -25,7 +25,7 @@ class Main extends CI_Controller {
 		
 		if($user_data)
 		{
-			echo ucfirst($this->array_to_single($user_data, "first_name"));
+			$first_name =  ucfirst($this->array_to_single($user_data, "first_name"));
 		}
 
 	}
