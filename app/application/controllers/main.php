@@ -19,14 +19,23 @@ class Main extends CI_Controller {
 
 	public function home()
 	{
-		#$this->load->view("home");
-		$logged_in_member = $this->session->all_userdata()['id_number'];
-		$user_data = $this->model_users->user_details("first_name", $logged_in_member);
 		
-		if($user_data)
+		if($this->session->userdata('is_logged_in'))
 		{
-			$first_name =  ucfirst($this->array_to_single($user_data, "first_name"));
+			$this->load->view("home");
+			$logged_in_member = $this->session->all_userdata()['id_number'];
+			$user_data = $this->model_users->user_details("first_name", $logged_in_member);
+			
+			if($user_data)
+			{
+				$first_name =  ucfirst($this->array_to_single($user_data, "first_name"));
+			}
 		}
+		else
+		{
+			$this->load->view("home");
+		}
+		
 
 	}
 
