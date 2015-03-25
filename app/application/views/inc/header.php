@@ -36,7 +36,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="<?php echo base_url();?>main/about">About us</a></li>
-        <li><a href="#">Gallery</a></li>
+        <li><a href="<?php echo base_url();?>main/gallery">Gallery</a></li>
         <li><a href="#">Foundation</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>

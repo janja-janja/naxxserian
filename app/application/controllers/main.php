@@ -47,6 +47,14 @@ class Main extends CI_Controller {
 		$this->load->view("about");
 	}
 
+	public function gallery()
+	/*
+	Pictorials of activities about naxxserian
+	*/
+	{
+		$this->load->view("gallery");
+	}
+
 	private function array_to_single($array, $column)
 	/*
 	Array to  single value
