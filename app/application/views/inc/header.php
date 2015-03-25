@@ -57,29 +57,25 @@
       </ul>
      
      <!-- Search button -->
-      <form class="navbar-form navbar-left" role="search">
+      <!-- <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Search</button>
-      </form>
+      </form> -->
       <!-- End of search -->
 
       
       <?php 
 
         if(!$this->session->userdata('is_logged_in'))
-        {
-          $login = "<a href=".base_url()."main/login>Login</a>";
-        }
+          $login = "<a class='white'href=".base_url()."main/login><strong>Login</strong></a>";
         else
-        {
-          $login = "<a href=".base_url()."main/logout>Logout</a>";
-        }
+          $login = "<a class='white'href=".base_url()."main/logout><strong>Logout</strong></a>";
        ?>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><?php echo $login; ?></li>
+        <li class="highlighter"><?php echo $login; ?></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
