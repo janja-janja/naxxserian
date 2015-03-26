@@ -35,20 +35,55 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="<?php echo base_url();?>main/about">About us</a></li>
-        <li><a href="<?php echo base_url();?>main/gallery">Gallery</a></li>
-        <li><a href="#">Foundation</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo base_url();?>main/projects">Ongoing</a></li>
-            <li class="divider"></li>
-            <li><a href="<?php echo base_url();?>main/projects">Completed</a></li>
-            <li class="divider"></li>
-            <li><a href="<?php echo base_url();?>main/projects">Pending</a></li>
-            
-          </ul>
-        </li>
+       
+        <?php 
+          /*load member(s) only tabs*/
+          $this->load->model("model_users");
+          if($this->session->userdata("is_logged_in"))
+          {/*members only area*/
+            echo('<li><a href="base_url();main/members">Request Loan</a></li>');
+            echo('<li><a href="base_url();main/members">Members</a></li>');
+            echo('<li><a href="base_url();main/members">Downloads</a></li>');
+            /*committees dropdown*/
+            echo('
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Committees<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="base_url();main/Investment">Investment</a></li>
+                <li class="divider"></li>
+                <li><a href="base_url();main/foundation">Foundation</a></li>
+                <li class="divider"></li>
+                <li><a href="base_url();main/special_committee">Special Committee</a></li>
+                
+              </ul>
+            </li>
+            ');
+
+          }
+          else
+          {/*public area*/
+            echo('<li><a href="base_url();main/about">About us</a></li>');
+            echo('<li><a href="base_url();main/gallery">Gallery</a></li>');
+            echo('<li><a href="#">Naxxserian Foundation</a></li>');
+
+            /*projects dropdown*/
+            echo('
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="base_url();main/projects">Ongoing</a></li>
+              <li class="divider"></li>
+              <li><a href="base_url();main/projects">Completed</a></li>
+              <li class="divider"></li>
+              <li><a href="base_url();main/projects">Pending</a></li>
+              
+            </ul>
+          </li>
+          ');
+          }
+         ?>
+
+        
       </ul>
      
      <!-- Search button -->
