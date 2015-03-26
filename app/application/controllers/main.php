@@ -125,8 +125,9 @@ class Main extends CI_Controller {
 		if ($this->form_validation->run()){
 			//create session for the user
 			$data = array(
-					'id_number' => $this->input->post('id_number'),
-					'is_logged_in' => 1
+					"id_number" => $this->input->post("id_number"),
+					"is_logged_in" => 1,
+					"first_name"
 				);
 			$this->session->set_userdata($data);
 			redirect('main/members');
@@ -192,7 +193,7 @@ class Main extends CI_Controller {
 		{
 			$data = array(
 					"main" => "members",
-					"title" => "Naxxserian &middot; Members"
+					"title" => "Naxxserian &middot; members"
 				);
 			
 			$this->_load_view($data);
