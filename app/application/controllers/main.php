@@ -7,8 +7,11 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		#load views and models on startup
-		$this->load->view('inc/template');
+		#$this->load->view('inc/template');
 		$this->load->model('model_users');
+	}
+	public function _load_view($data){
+		$this->load->view("inc/template", $data);
 	}
 
 	public function index()
@@ -22,13 +25,20 @@ class Main extends CI_Controller {
 		
 		if($this->session->userdata('is_logged_in'))
 		{
-			$this->load->view("home");
+		
+			
 			$logged_in_member = $this->session->all_userdata()['id_number'];
 			$user_data = $this->model_users->user_details("first_name", $logged_in_member);
 			
 			if($user_data)
 			{
 				$first_name =  ucfirst($this->array_to_single($user_data, "first_name"));
+
+				$data = array();
+				$data["username"] = $first_name;
+				$data['main'] = 'home';
+
+				$this->_load_view($data);
 			}
 		}
 		else
@@ -180,11 +190,22 @@ class Main extends CI_Controller {
 	public function members(){
 		if($this->session->userdata('is_logged_in'))
 		{
-			$this->load->view('members');
+			$data = array(
+					"main" => "members",
+					"title" => "Naxxserian &middot; Members"
+				);
+			
+			$this->_load_view($data);
 		}
 		else
 		{
-			$this->load->view('login');
+			$data = array(
+					"main" => "login",
+					"title" => "Naxxserian &middot; Login"
+				);
+			
+			$this->_load_view($data);
+
 		}
 	}
 
