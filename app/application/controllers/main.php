@@ -76,7 +76,7 @@ class Main extends CI_Controller {
 		#load pending projects view here
 
 
-		
+
 	}
 
 	private function array_to_single($array, $column)
@@ -110,7 +110,7 @@ class Main extends CI_Controller {
 	public function login_validation(){
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('id_number', 'ID number', 'required|trim|xss_clean|callback_validate_credentials');
-		$this->form_validation->set_rules('password', 'Password', 'required|md5|trim');
+		$this->form_validation->set_rules('password', 'Password', 'required|sha1|trim');
 
 		if ($this->form_validation->run()){
 			//create session for the user

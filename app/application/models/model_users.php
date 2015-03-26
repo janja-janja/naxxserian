@@ -17,7 +17,7 @@
 
  	public function can_log_in(){
  		$this->db->where('id_number', $this->input->post('id_number'));
- 		$this->db->where('password', md5($this->input->post('password')));
+ 		$this->db->where('password', sha1($this->input->post('password')));
 
  		$query = $this->db->get('members');
 
