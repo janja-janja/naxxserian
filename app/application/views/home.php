@@ -1,4 +1,3 @@
-<?php print($username); ?>
 <div class="jumbotron">
 
 	<i class="fa fa-gavel fa-4x nax-header"></i>

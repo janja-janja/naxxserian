@@ -41,6 +41,7 @@
           $this->load->model("model_users");
           if($this->session->userdata("is_logged_in"))
           {/*members only area*/
+            $username = $this->session->userdata("username");
             ?>
 
             <li><a href="<?php echo base_url();?>main/members">Profile &middot; <?php echo $username; ?></a></li>'
