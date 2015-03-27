@@ -77,11 +77,11 @@
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="base_url();main/projects">Ongoing</a></li>
+              <li><a href="<?php echo base_url();?>main/projects">Ongoing</a></li>
               <li class="divider"></li>
-              <li><a href="base_url();main/projects">Completed</a></li>
+              <li><a href="<?php echo base_url();?>main/projects">Completed</a></li>
               <li class="divider"></li>
-              <li><a href="base_url();main/projects">Pending</a></li>
+              <li><a href="<?php echo base_url();?>main/projects">Pending</a></li>
               
             </ul>
           </li>

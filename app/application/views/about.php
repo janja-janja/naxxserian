@@ -1,3 +1,3 @@
-<div>
-	<h3 class="container">About us</h3>
+<div class="container offset-top">
+	<h3>About us</h3>
 </div>

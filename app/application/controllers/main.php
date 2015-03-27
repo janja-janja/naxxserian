@@ -57,7 +57,12 @@ class Main extends CI_Controller {
 	About the app / organisation
 	*/
 	{
-		$this->load->view("about");
+		$data = array(
+			"main" => "about",
+			"title" => "Naaxserian &middot; About"
+			);
+
+		$this->_load_view($data);
 	}
 
 	public function gallery()
@@ -65,7 +70,12 @@ class Main extends CI_Controller {
 	Pictorials of activities about naxxserian
 	*/
 	{
-		$this->load->view("gallery");
+		$data = array(
+			"main" => "gallery",
+			"title" => "Naaxserian &middot; Gallery"
+			);
+		
+		$this->_load_view($data);
 	}
 
 	public function projects()
