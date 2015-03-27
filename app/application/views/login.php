@@ -25,7 +25,7 @@
 
 
 <!--***SIGN-IN-FORM***-->
-	 <div class="container">
+	 <div class="container offset-top">
 	      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>main/login_validation" id="login-form-auth">
 	      		<span class="text text-danger"><?php echo validation_errors(); ?></span>
 		      	
