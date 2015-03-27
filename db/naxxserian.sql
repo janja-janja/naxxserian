@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 26, 2015 at 11:43 PM
+-- Generation Time: Mar 27, 2015 at 12:15 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `about` (
   `uploaded_by` int(8) NOT NULL,
   PRIMARY KEY (`about_id`),
   KEY `uploaded_by` (`uploaded_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`comment_id`),
   KEY `project_id` (`project_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `downloads` (
   `uploaded_by` int(8) NOT NULL,
   PRIMARY KEY (`file_id`),
   KEY `uploaded_by` (`uploaded_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `loans` (
   PRIMARY KEY (`loan_id`),
   KEY `guarantor_id_number` (`guarantor_id_number`),
   KEY `loanee_id_number` (`loanee_id_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -118,13 +118,6 @@ CREATE TABLE IF NOT EXISTS `members` (
   PRIMARY KEY (`id_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='naxserian members table';
 
---
--- Dumping data for table `members`
---
-
-INSERT INTO `members` (`first_name`, `middle_name`, `surname`, `id_number`, `phone_number`, `password`, `photo`, `registration_date`, `category`, `type`, `status`, `loan_status`) VALUES
-('denis', 'mburu', 'karanja', 27414209, '0725332343', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'naxxserian.default.photo.naxxserian.png', '2015-03-26 12:28:00', 'member', 'member', 1, 'dormant');
-
 -- --------------------------------------------------------
 
 --
@@ -144,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `monthly_contribution` (
   PRIMARY KEY (`mc_auto_id`),
   KEY `id_number` (`id_number`),
   KEY `added_by` (`added_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='table_to_hold_monthly_contibutions of members' AUTO_INCREMENT=264 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='table_to_hold_monthly_contibutions of members' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -161,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `outsider_messages` (
   `recipient` int(8) NOT NULL,
   PRIMARY KEY (`message_id`),
   KEY `recipient` (`recipient`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -193,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `date_added` varchar(30) NOT NULL,
   PRIMARY KEY (`project_id`),
   KEY `added_by` (`added_by`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -210,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `research` (
   `researcher` int(8) NOT NULL,
   PRIMARY KEY (`research_id`),
   KEY `researcher` (`researcher`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -227,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `research_comments` (
   PRIMARY KEY (`comment_id`),
   KEY `comment_by` (`comment_by`),
   KEY `research_id` (`research_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -246,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `temp_loan` (
   PRIMARY KEY (`loan_id`),
   KEY `loanee` (`loanee`),
   KEY `guarantor` (`guarantor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -264,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `website_visitors` (
   `date_time` varchar(255) NOT NULL,
   PRIMARY KEY (`auto_id`),
   KEY `id_number` (`id_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='website visitors' AUTO_INCREMENT=630 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='website visitors' AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
