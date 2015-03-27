@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="<?php echo base_url();?>favicon.ico">
 
-    <title>Naxxserian Investment Enterprise</title>
+    <title><?php echo $title; ?></title>
     <link href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
      <link href="<?php echo base_url();?>assets/css/naxxserian.css" rel="stylesheet">

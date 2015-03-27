@@ -9,6 +9,9 @@ class Main extends CI_Controller {
 		#load views and models on startup
 		#$this->load->view('inc/template');
 		$this->load->model('model_users');
+		$data = array(
+				"title" => "Naxxserian Investment Enterprise"
+			);
 	}
 	public function _load_view($data){
 		$this->load->view("inc/template", $data);
