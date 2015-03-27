@@ -52,3 +52,18 @@ li.active-inverse a.white{
 li.active-inverse a.white:hover{
 	color: #fefefe;
 }
+.hrDivider{
+	border: 1px solid black;
+}
+.hrDividerDotted{
+	border: 1px dotted black;
+}
+.hrDividerBetween{
+	border: 1px solid gray;
+}
+.offset-top{
+	padding-top: 50px;
+}
+.offset-margin{
+	margin-top: 50px;
+}
