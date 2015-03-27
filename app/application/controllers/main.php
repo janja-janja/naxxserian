@@ -36,9 +36,13 @@ class Main extends CI_Controller {
 			{
 				$first_name =  ucfirst($this->array_to_single($user_data, "first_name"));
 
-				$data = array();
-				$data["username"] = $first_name;
-				$data['main'] = 'home';
+				/*all thru page content*/
+				$data = array(
+						"username" => $first_name,
+						"main" => "home",
+						"title" => "Naxxserian &middot; Home"
+					);
+
 
 				$this->_load_view($data);
 			}
@@ -125,11 +129,27 @@ class Main extends CI_Controller {
 				"main" => "login",
 				"title" => "Naxxserian &middot; Login"
 			);
-		!$this->session->userdata('is_logged_in') ? $this->_load_view($data): $this->_load_view('members');
+
+		$data_2 = array(
+				"main" => "members",
+				"title" => "Naxxserian &middot; Members"
+			);
+
+		!$this->session->userdata('is_logged_in') ? $this->_load_view($data): $this->_load_view($data_2);
 	}
 
 	public function signup(){
-		!$this->session->userdata('is_logged_in') ? $this->load->view('signup'): redirect('main/members');
+		$data = array(
+				"main" => "signup",
+				"title" => "Naxxserian &middot; Sign Up"
+			);
+
+		$data_2 = array(
+				"main" => "members",
+				"title" => "Naxxserian &middot; Members"
+			);
+
+		!$this->session->userdata('is_logged_in') ? $this->_load_view($data): $this->_load_view($data_2);
 	}
 
 
@@ -165,7 +185,12 @@ class Main extends CI_Controller {
 		} 
 		else
 		{
-			$this->load->view('login');
+			$data = array(
+					"main" => "login",
+					"title" => "Naxxserian &middot; Login"
+				);
+
+			$this->_load_view($data);
 		}
 	}
 
@@ -183,8 +208,13 @@ class Main extends CI_Controller {
 		}
 		else
 		{
+			$data = array(
+				"main" => "signup",
+				"title" => "Naxxserian &middot; Sign Up"
+			);
+
 			echo "<span class='alert alert-error'>Couldn't sign you up.</span>";
-			$this->load->view('signup');
+			$this->_load_view($data);
 		}
 	}
 
