@@ -157,41 +157,59 @@ class Main extends CI_Controller {
 	/*
 	*Validate log ins
 	*/
-	public function login_validation(){
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('id_number', 'ID number', 'required|trim|xss_clean|callback_validate_credentials');
-		$this->form_validation->set_rules('password', 'Password', 'required|sha1|trim');
+	public function login_validation()
+	{
+		
+		if(!$this->session->userdata("is_logged_in"))
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('id_number', 'ID number', 'required|trim|xss_clean|callback_validate_credentials');
+			$this->form_validation->set_rules('password', 'Password', 'required|sha1|trim');
 
-		if ($this->form_validation->run()){
-			/*get username*/
-			$id_number = $this->input->post("id_number");
-			$user_data = $this->model_users->user_details("first_name", $id_number);
-			$username = ucfirst($this->array_to_single($user_data, "first_name"));
-			
-			//create session for the user
-			$data = array(
-					"id_number" => $id_number,
-					"is_logged_in" => 1,
-					"username" => $username
-				);
+			if ($this->form_validation->run())
+			{
+				/*get username*/
+				$id_number = $this->input->post("id_number");
+				$user_data = $this->model_users->user_details("first_name", $id_number);
+				$username = ucfirst($this->array_to_single($user_data, "first_name"));
+				
+				//create session for the user
+				$data = array(
+						"id_number" => $id_number,
+						"is_logged_in" => 1,
+						"username" => $username
+					);
 
-			$data_2 = array(
-					"main" => "members",
-					"title" => "Naxxserian &middot; Members"
-				);
+				$data_2 = array(
+						"main" => "members",
+						"title" => "Naxxserian &middot; Members"
+					);
 
-			$this->session->set_userdata($data);
-			#redirect('main/members');
-			$this->_load_view($data_2);
-		} 
+				$this->session->set_userdata($data);
+				#redirect('main/members');
+				$this->_load_view($data_2);
+			}
+		 
+			else
+			{
+				$data = array(
+						"main" => "login",
+						"title" => "Naxxserian &middot; Login"
+					);
+
+				$this->_load_view($data);
+			}
+		}
 		else
 		{
+			/*not logged in*/
 			$data = array(
-					"main" => "login",
-					"title" => "Naxxserian &middot; Login"
-				);
+						"main" => "members",
+						"title" => "Naxxserian &middot; Members"
+					);
 
-			$this->_load_view($data);
+				$this->_load_view($data);
+
 		}
 	}
 
