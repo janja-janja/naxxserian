@@ -265,14 +265,6 @@ class Main extends CI_Controller {
 			);
 
 			$this->_load_view($data);
-
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('email_address', 'Email address', 'required|trim|xss_clean|is_email');
-
-			if($this->form_validation->run())
-			{
-				echo"<span class='alert alert-success'>Is a valid email</span> ";
-			}
 		}
 		else
 		{
@@ -282,6 +274,32 @@ class Main extends CI_Controller {
 		}
 
 
+	}
+
+	public function reset_password_validation()
+	{
+		if(!$this->session->userdata("is_logged_in"))
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('email_address', 'Email address', 'required|trim|xss_clean|valid_email');
+
+			if($this->form_validation->run())
+			{
+				echo"<span class='alert alert-success'>Is a valid email</span> ";
+			}
+			else
+			{
+				$data = array(
+						"main" => "reset_password",
+						"title" => "Naxxserian &middot; Reset Password"
+					);
+				$this->_load_view($data);
+			}
+		}
+		else
+		{
+			redirect("main/members");
+		}
 	}
 
 	//callback function to validate usernames and passwords

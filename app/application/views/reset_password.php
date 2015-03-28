@@ -1,6 +1,6 @@
 <!--***SIGN-IN-FORM***-->
  <div class="container">
-      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>main/reset_password">
+      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>main/reset_password_validation">
       		<span class="text text-danger"><?php echo validation_errors(); ?></span>
 	      	
 	        <h3 class="form-signin-heading visible-desktop"><i class="fa fa-lock"></i>Reset password</h3>
