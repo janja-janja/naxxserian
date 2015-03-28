@@ -185,8 +185,21 @@ class Main extends CI_Controller {
 		if(!$this->session->userdata("is_logged_in"))
 		{
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('id_number', 'ID number', 'required|trim|xss_clean|callback_validate_credentials');
-			$this->form_validation->set_rules('password', 'Password', 'required|sha1|trim');
+
+			$configs = array(
+					array(
+							"field" => "id_number",
+							"label" => "ID Number",
+							"rules" => "required|trim|xss_clean|callback_validate_credentials"
+						),
+
+					array(
+							"field" => "password",
+							"label" => "Password",
+							"rules" => "required|sha1|trim"
+						)
+				);
+			$this->form_validation->set_rules($configs);
 
 			if ($this->form_validation->run())
 			{
@@ -234,9 +247,28 @@ class Main extends CI_Controller {
 	public function signup_validation()
 	{
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('id_number', 'ID number', 'required|trim|xss_clean|is_unique[members.id_number]');
-		$this->form_validation->set_rules('password', 'Password', 'required|trim');
-		$this->form_validation->set_rules('conf_password', 'Confirm password', 'required|trim|matches[password]');
+
+		$configs = array(
+				array(
+						"field" => "id_number",
+						"label" => "ID Number",
+						"rules" => "required|trim|xss_clean|is_unique[members.id_number]"
+					),
+
+				array(
+						"field" => "password",
+						"label" => "Password",
+						"rules" => "required|trim|"
+					),
+
+				array(
+						"field" => "conf_password",
+						"label" => "Confirm Password",
+						"rules" => "required|trim|matches[password]"
+					)
+			);
+
+		$this->form_validation->set_rules($configs);
 
 		if ($this->form_validation->run())
 		{
@@ -281,11 +313,20 @@ class Main extends CI_Controller {
 		if(!$this->session->userdata("is_logged_in"))
 		{
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('email_address', 'Email address', 'required|trim|xss_clean|valid_email');
+			$configs = array(
+					array(
+							"field" => "email_address",
+							"label" => "Email Address",
+							"rules" => "required|trim|xss_clean|valid_email"
+						)
+				);
+			$this->form_validation->set_rules($configs);
 
 			if($this->form_validation->run())
 			{
-				echo"<span class='alert alert-success'>Is a valid email</span> ";
+				/*send email to the user here, with a reset password link*/
+
+
 			}
 			else
 			{
