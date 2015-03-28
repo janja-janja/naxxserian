@@ -277,8 +277,7 @@ class Main extends CI_Controller {
 		else
 		{
 			/*come back here and set page to redirect to the curent page*/
-			 echo anchor('main/logout','logout/'.base64_encode(current_url()));
-	    
+			 redirect("main/home");
 
 		}
 
