@@ -202,14 +202,9 @@ class Main extends CI_Controller {
 						"username" => $username
 					);
 
-				$data_2 = array(
-						"main" => "members",
-						"title" => "Naxxserian &middot; Members"
-					);
-
 				$this->session->set_userdata($data);
-				#redirect('main/members');
-				$this->_load_view($data_2);
+				redirect('main/members');
+			
 			}
 		 
 			else
@@ -262,13 +257,29 @@ class Main extends CI_Controller {
 	public function reset_password()
 	{	
 		#load view
-		$this->load->view("reset_password");
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('email_address', 'Email address', 'required|trim|xss_clean|is_email');
-
-		if($this->form_validation->run())
+		if(!$this->session->userdata("is_logged_in"))
 		{
-			echo"<span class='alert alert-success'>Is a valid email</span> ";
+			$data = array(
+				"main" => "reset_password",
+				"title" => "Naxxserian &middot; Reset Password"
+			);
+
+			$this->_load_view($data);
+
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('email_address', 'Email address', 'required|trim|xss_clean|is_email');
+
+			if($this->form_validation->run())
+			{
+				echo"<span class='alert alert-success'>Is a valid email</span> ";
+			}
+		}
+		else
+		{
+			/*come back here and set page to redirect to the curent page*/
+			 echo anchor('main/logout','logout/'.base64_encode(current_url()));
+	    
+
 		}
 
 
@@ -295,7 +306,7 @@ class Main extends CI_Controller {
 		{
 			$data = array(
 					"main" => "members",
-					"title" => "Naxxserian &middot; members"
+					"title" => "Naxxserian &middot; Members"
 				);
 			
 			$this->_load_view($data);
