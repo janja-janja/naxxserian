@@ -325,34 +325,51 @@ class Main extends CI_Controller {
 			if($this->form_validation->run())
 			{
 				/*check first if this email is part of existing members*/
+				$email = $this->input->post("email_address");
+				$email_check = array(
+						array(
+							"field" => "email_address",
+							"label" => "Email Address",
+							"rules" => "is_unique[members.email_address]"
+							)
+					);
+				$this->form_validation->set_rules($email_check);
 
-
-				/*send email to the user here, with a reset password link*/
-				$this->load->library("email");
-
-				$this->email->from("no-reply@naxxserian.com", "Naxxserian Investment Enterprise");
-				$this->email->to($this->input->post("email_address"));
-				$this->email->subject("Password Reset |NIE)");
-
-				$url = base_url();
-				$url = $url."main/reset_password";
-
-				$email_body = "
-				<h5>Reset Password</h5>
-					<p>
-						You requested for a password reset on Naxxserian Investment Enterprise. Click <a href='".$url."'><strong>this link</strong></a> to reset
-					</p>
-					<h6>Naxxserian Investment Enterprise(&reg;)
-				";
-
-
-				$this->email->message($email_body);
-
-				if($this->email->send())
+				if(!$this->form_validation->run())
 				{
-					echo"Email Sent<br>".$this->input->post("email_address");
+					/*send email to the user here, with a reset password link*/
+					$this->load->library("email");
+
+					$this->email->from("no-reply@naxxserian.com", "Naxxserian Investment Enterprise");
+					$this->email->to($email);
+					$this->email->subject("Password Reset |NIE)");
+
+					$url = base_url();
+					$url = $url."main/reset_password";
+
+					$email_body = "
+					<h5>Reset Password</h5>
+						<p>
+							You requested for a password reset on Naxxserian Investment Enterprise. Click <a href='".$url."'><strong>this link</strong></a> to reset
+						</p>
+						<h6>Naxxserian Investment Enterprise(&reg;)
+					";
+
+
+					$this->email->message($email_body);
+
+					if($this->email->send())
+					{
+						echo"Email Sent to <br>".$email;
+					}
+					#echo $this->email->print_debugger();
 				}
-				#echo $this->email->print_debugger();
+				else
+				{
+					echo "Sorry, this member does not exist";
+				}
+
+				
 				
 
 			}
