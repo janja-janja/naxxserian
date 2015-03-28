@@ -32,18 +32,29 @@
 
 		<!-- Change password -->
 		<h4><i class="fa fa-lock"></i>Change Password</h4>
-		<form method="POST" class="form-group">
+		<span class="text text-danger"><?php echo validation_errors(); ?></span>
+		<form method="POST" class="form-group" action="<?php echo base_url();?>main/change_password">
 			<label for="old_password">Old Password</label> 
-			<input type="text" id="old_password" class="col-lg-12 form-control">
-			<br><br><br><br>
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input type="password" id="old_password" class="col-lg-12 form-control">
+			</div>
+			<br>
 
+			
 			<label for="new_password">New password</label> 
-			<input type="text" id="new_password" class="col-lg-12 form-control">
-			<br><br><br><br>
-
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input type="password" id="new_password" class="col-lg-12 form-control">
+			</div>
+			<br>
+			
 			<label for="conf_new_password">Confirm New password</label> 
-			<input type="text" id="conf_new_password" class="col-lg-12 form-control">
-			<br><br><br><br>
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input type="password" id="conf_new_password" class="col-lg-12 form-control">
+			</div>
+			<br>
 
 			<input type='submit' name='change_password_btn' value='Change Password' class='btn btn-danger'/>
 		</form>

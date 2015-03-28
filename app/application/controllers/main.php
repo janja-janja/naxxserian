@@ -24,6 +24,28 @@ class Main extends CI_Controller {
 		
 	}
 
+
+	public function change_password()
+	{
+		$this->load->library("form_validation");
+
+		/**/
+		$old_pass = $this->input->post("old_password");
+		$new_password = $this->input->post("new_password");
+		$conf_password = $this->input->post("conf_new_password");
+
+		$this->form_validation->set_rules('old_password', 'Old Password', 'required|trim|xss_clean');
+		$this->form_validation->set_rules('new_password', 'New Password', 'required|sha1|trim');
+		$this->form_validation->set_rules('conf_new_password', 'Confirm New Password', 'required|sha1|trim|matches[new_password]');
+
+		if($this->form_validation->run())
+		{
+			/*code here to update pass*/
+			echo "Good. Move on bro!.";
+
+		}
+	}
+
 	public function home()
 	{
 		
