@@ -330,12 +330,13 @@ class Main extends CI_Controller {
 						array(
 							"field" => "email_address",
 							"label" => "Email Address",
-							"rules" => "is_unique[members.email_address]"
+							"rules" => "is_unique[members.email_address]|callback_validate_email"
 							)
 					);
 				$this->form_validation->set_rules($email_check);
 
 				if(!$this->form_validation->run())
+					/*user exists*/
 				{
 					/*send email to the user here, with a reset password link*/
 					$this->load->library("email");
@@ -364,16 +365,22 @@ class Main extends CI_Controller {
 					}
 					#echo $this->email->print_debugger();
 				}
-				else
-				{
-					echo "Sorry, this member does not exist";
-				}
 
-				
-				
+				else
+					/*User does not exist*/
+				{
+					$this->form_validation->set_message("Sorry, this member does not exist");
+					$data = array(
+							"main" => "reset_password",
+							"title" => "Naxxserian &middot; Reset Password"
+						);
+					$this->_load_view($data);
+
+				}
 
 			}
 			else
+				/*Email field does not meet the rules*/
 			{
 				$data = array(
 						"main" => "reset_password",
@@ -383,9 +390,16 @@ class Main extends CI_Controller {
 			}
 		}
 		else
+			/*User is logged in*/
 		{
 			redirect("main/members");
 		}
+	}
+
+	//callback function to validate email address(if it exists and set message)
+	public function validate_email()
+	{
+		
 	}
 
 	//callback function to validate usernames and passwords
