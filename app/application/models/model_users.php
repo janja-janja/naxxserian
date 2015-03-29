@@ -15,9 +15,30 @@
  		}
  	}
 
- 	public function can_log_in(){
+ 	public function can_log_in()
+ 	{
  		$this->db->where('id_number', $this->input->post('id_number'));
  		$this->db->where('password', sha1($this->input->post('password')));
+
+ 		$query = $this->db->get('members');
+
+ 		if($query->num_rows() == 1){
+ 			return true;
+ 		}
+ 		else
+ 		{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function is_a_member($email_address)
+ 	/*
+	Verify that one is a member
+	@param string(email_address)
+	@return boolean
+ 	*/
+ 	{
+ 		$this->db->where('email_address', $email_address);
 
  		$query = $this->db->get('members');
 

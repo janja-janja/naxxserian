@@ -243,6 +243,20 @@ class Main extends CI_Controller {
 		}
 	}
 
+	//callback function to validate usernames and passwords
+	public function validate_credentials(){
+
+		if ($this->model_users->can_log_in()){
+			return true;
+		}
+		else
+		{
+			$this->form_validation->set_message('validate_credentials', 'Incorrect login credentials!');
+			return false;
+		}
+	}
+
+
 	/*Validate sign ups*/
 	public function signup_validation()
 	{
@@ -330,12 +344,12 @@ class Main extends CI_Controller {
 						array(
 							"field" => "email_address",
 							"label" => "Email Address",
-							"rules" => "is_unique[members.email_address]|callback_validate_email"
+							"rules" => "callback_validate_email"
 							)
 					);
 				$this->form_validation->set_rules($email_check);
 
-				if(!$this->form_validation->run())
+				if($this->form_validation->run())
 					/*user exists*/
 				{
 					/*send email to the user here, with a reset password link*/
@@ -363,13 +377,16 @@ class Main extends CI_Controller {
 					{
 						echo"Email Sent to <br>".$email;
 					}
-					#echo $this->email->print_debugger();
+					else
+					{
+						echo $this->email->print_debugger();
+					}
+					
 				}
 
 				else
 					/*User does not exist*/
 				{
-					$this->form_validation->set_message("Sorry, this member does not exist");
 					$data = array(
 							"main" => "reset_password",
 							"title" => "Naxxserian &middot; Reset Password"
@@ -399,21 +416,21 @@ class Main extends CI_Controller {
 	//callback function to validate email address(if it exists and set message)
 	public function validate_email()
 	{
-		
-	}
+		$email_address = $this->input->post("email_address");
 
-	//callback function to validate usernames and passwords
-	public function validate_credentials(){
-
-		if ($this->model_users->can_log_in()){
+		if($this->model_users->is_a_member($email_address))
+		{
 			return true;
 		}
 		else
 		{
-			$this->form_validation->set_message('validate_credentials', 'Incorrect login credentials!');
+			$url = base_url()."main/signup";
+
+			$this->form_validation->set_message("validate_email", "Sorry, this user does not exist. <a href='".$url."'>Register</a> with Naxxserian first.");
 			return false;
 		}
 	}
+
 
 	/**
 	*Loged in members area
