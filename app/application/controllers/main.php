@@ -360,7 +360,7 @@ class Main extends CI_Controller {
 					$this->email->subject("Password Reset |NIE)");
 
 					$url = base_url();
-					$url = $url."main/reset_password";
+					$url = $url."main/recover_password";
 
 					$email_body = "
 					<h5>Reset Password</h5>
@@ -431,6 +431,27 @@ class Main extends CI_Controller {
 		}
 	}
 
+	public function recover_password()
+	/*
+	Allows users to reset their passwords incase they forgot
+	(link form email address sent by a valid member)
+	*/
+	{
+		if(!$this->session->userdata("is_logged_in"))
+		{
+			$data = array(
+					"main" => "recover_password",
+					"title" => "Naaxserian &middot; Recovery Point"
+				);
+
+			$this->_load_view($data);
+		}
+		else
+		{
+			redirect("main/members");
+		}
+		
+	}
 
 	/**
 	*Loged in members area
