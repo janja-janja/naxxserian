@@ -29,20 +29,64 @@ class Main extends CI_Controller {
 	{
 		$this->load->library("form_validation");
 
-		/**/
-		$old_pass = $this->input->post("old_password");
-		$new_password = $this->input->post("new_password");
-		$conf_password = $this->input->post("conf_new_password");
+		$config = array(
+				array(
+						"field" => "member_old_password",
+						"label" => "<b>Old Password</b>",
+						"rules" => "required|trim"
+					),
 
-		$this->form_validation->set_rules('old_password', 'Old Password', 'required|trim|xss_clean');
-		$this->form_validation->set_rules('new_password', 'New Password', 'required|sha1|trim');
-		$this->form_validation->set_rules('conf_new_password', 'Confirm New Password', 'required|sha1|trim|matches[new_password]');
+				array(
+						"field" => "member_new_password",
+						"label" => "<b>New Password</b>",
+						"rules" => "required|trim"
+					),
+
+				array(
+						"field" => "member_conf_new_password",
+						"label" => "<b>Confirm New Password</b>",
+						"rules" => "required|trim|matches[member_new_password]"
+					)
+			);
+
+		$this->form_validation->set_rules($config);
 
 		if($this->form_validation->run())
 		{
 			/*code here to update pass*/
-			echo "Good. Move on bro!.";
+			$new_password = $this->input->post("member_new_password");
+			$old_password = $this->input->post("member_old_password");
+			$unique_id = $this->session->all_userdata()["id_number"];
 
+			/*check if old password is correct*/
+			if($this->model_users->password_is_valid())
+			{
+				/*update password*/
+				if ($this->update_password($new_password, $unique_id))
+				{
+					echo "<h5 class='alert alert-success'>Password updated</h5>";
+				}
+				else
+				{
+					echo "<h5 class='alert alert-danger'>Something went wrong :( </h5>";
+				}
+			}
+			else
+			{
+				/*old password incorrect*/
+				echo "<h5 class='alert alert-danger'>Incorrect Old password!</h5>";
+				echo $unique_id;
+				echo "<br>".($old_password);
+			}
+			
+		}
+		else
+		{
+			$data = array(
+					"main" => "members",
+					"title" => "Naxxserian &middot; Members"
+				);
+			$this->_load_view($data);
 		}
 	}
 
@@ -459,17 +503,17 @@ class Main extends CI_Controller {
 	Update new user password to the database
 	*/
 	{
-		if($this->session->userdate("is_logged_in"))
+		if($this->session->userdata("is_logged_in"))
 		{
 			/*logged in members password reset. Use session vars*/
 			$password = $this->input->post("new_password");
-			$unique_id = $this->session->all_userdata["id_number"];
+			$unique_id = $this->session->all_userdata()["id_number"];
 
 			if($this->model_users->make_changes($password, $unique_id))
 			{
-				echo "Update done";
+				return true;
 			}
-			else echo "Not updated";
+			else return false;
 		}
 		else
 		{

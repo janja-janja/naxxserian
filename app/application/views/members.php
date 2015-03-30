@@ -37,7 +37,7 @@
 			<label for="old_password">Old Password</label> 
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" id="old_password" class="col-lg-12 form-control">
+				<input type="password" name="member_old_password" class="col-lg-12 form-control">
 			</div>
 			<br>
 
@@ -45,14 +45,14 @@
 			<label for="new_password">New password</label> 
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" id="new_password" class="col-lg-12 form-control">
+				<input type="password" name="member_new_password" class="col-lg-12 form-control">
 			</div>
 			<br>
 			
 			<label for="conf_new_password">Confirm New password</label> 
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" id="conf_new_password" class="col-lg-12 form-control">
+				<input type="password" name="member_conf_new_password" class="col-lg-12 form-control">
 			</div>
 			<br>
 

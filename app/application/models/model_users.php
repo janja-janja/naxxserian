@@ -22,7 +22,30 @@
 
  		$query = $this->db->get('members');
 
- 		if($query->num_rows() == 1){
+ 		if($query->num_rows() == 1)
+ 		{
+ 			return true;
+ 		}
+ 		else
+ 		{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function password_is_valid()
+ 	/*
+	Check if old password provided matches the one in db
+	@params string, int
+	@return boolean
+ 	*/
+ 	{
+ 		$this->db->where('id_number', $this->session->all_userdata()["id_number"]);
+ 		$this->db->where('password', sha1($this->input->post("member_old_password")));
+
+ 		$query = $this->db->get('members');
+
+ 		if($query->num_rows() == 1)
+ 		{
  			return true;
  		}
  		else
@@ -60,13 +83,19 @@
  	{
  		 $data = array(
          'password' => sha1($new_password)
-
       );
 
 		$this->db->where('id_number', $unique_id);
-		$this->db->update('members', $data) ? return true : return false;
+		if($this->db->update('members', $data))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
  	}
- 	
+
 
 
  	public function days_till_event()
