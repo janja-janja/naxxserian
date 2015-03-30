@@ -37,7 +37,7 @@
 		<!-- Change password -->
 		<h4><i class="fa fa-lock"></i>Change Password</h4>
 		<span class="text text-danger"><?php echo validation_errors(); ?></span>
-		<form method="POST" class="form-group" action="<?php echo base_url();?>main/change_password" id="scroll-to-password-field">
+		<form method="POST" class="form-group" action="<?php echo base_url();?>auth/change_password" id="scroll-to-password-field">
 			<label for="old_password">Old Password</label> 
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>

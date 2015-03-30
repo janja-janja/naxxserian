@@ -29,7 +29,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand nax-header" href="<?php echo base_url();?>main/home">Naxxserian Investment</a>
+      <?php 
+        if($this->session->userdata("is_logged_in"))
+        {
+          ?>
+      <a class="navbar-brand nax-header" href="<?php echo base_url();?>auth/home">Naxxserian Investment</a>
+      <?php 
+        }
+        else
+        {
+      ?>
+      <a class="navbar-brand nax-header" href="<?php echo base_url();?>out/">Naxxserian Investment</a>
+      <?php } ?>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,20 +56,20 @@
             $username = $this->session->userdata("username");
             ?>
 
-            <li><a href="<?php echo base_url();?>main/members">Profile &middot; <?php echo $username; ?></a></li>'
-            <li><a href="<?php echo base_url();?>main/members">Request Loan</a></li>
-            <li><a href="<?php echo base_url();?>main/members">Members</a></li>
-            <li><a href="<?php echo base_url();?>main/members">Downloads</a></li>
+            <li><a href="<?php echo base_url();?>auth/members">Profile &middot; <?php echo $username; ?></a></li>'
+            <li><a href="<?php echo base_url();?>auth/members">Request Loan</a></li>
+            <li><a href="<?php echo base_url();?>auth/members">Members</a></li>
+            <li><a href="<?php echo base_url();?>auth/members">Downloads</a></li>
             <!-- /*committees dropdown*/ -->
             
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Committees<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?php echo base_url();?>main/Investment">Investment</a></li>
+                <li><a href="<?php echo base_url();?>auth/Investment">Investment</a></li>
                 <li class="divider"></li>
-                <li><a href="<?php echo base_url();?>main/foundation">Foundation</a></li>
+                <li><a href="<?php echo base_url();?>auth/foundation">Foundation</a></li>
                 <li class="divider"></li>
-                <li><a href="<?php echo base_url();?>main/special_committee">Special Committee</a></li>
+                <li><a href="<?php echo base_url();?>auth/special_committee">Special Committee</a></li>
                 
               </ul>
             </li>
@@ -68,8 +80,8 @@
           {/*public area*/
             ?>
 
-            <li><a href="<?php echo base_url();?>main/about">About us</a></li>
-            <li><a href="<?php echo base_url();?>main/gallery">Gallery</a></li>
+            <li><a href="<?php echo base_url();?>out/about">About us</a></li>
+            <li><a href="<?php echo base_url();?>out/gallery">Gallery</a></li>
             <li><a href="#">Naxxserian Foundation</a></li>
 
             <!-- /*projects dropdown*/ -->
@@ -77,11 +89,11 @@
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="<?php echo base_url();?>main/projects">Ongoing</a></li>
+              <li><a href="<?php echo base_url();?>out/projects">Ongoing</a></li>
               <li class="divider"></li>
-              <li><a href="<?php echo base_url();?>main/projects">Completed</a></li>
+              <li><a href="<?php echo base_url();?>out/projects">Completed</a></li>
               <li class="divider"></li>
-              <li><a href="<?php echo base_url();?>main/projects">Pending</a></li>
+              <li><a href="<?php echo base_url();?>out/projects">Pending</a></li>
               
             </ul>
           </li>
@@ -105,9 +117,9 @@
       <?php 
 
         if(!$this->session->userdata('is_logged_in'))
-          $login = "<a style='color:white;' class='white'href=".base_url()."main/login><strong>Login</strong><i class='fa fa-lock'></i></a>";
+          $login = "<a style='color:white;' class='white'href=".base_url()."out/login><strong>Login</strong>&nbsp;<i class='fa fa-lock'></i></a>";
         else
-          $login = "<a style='color:white;'class='white'href=".base_url()."main/logout><strong>Logout</strong><i class='fa fa-sign-out'></i></a>";
+          $login = "<a style='color:white;'class='white'href=".base_url()."auth/logout><strong>Logout</strong>&nbsp;<i class='fa fa-sign-out'></i></a>";
        ?>
 
       <ul class="nav navbar-nav navbar-right">
