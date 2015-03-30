@@ -1,6 +1,6 @@
 <!--***RESET_PASSOWRD-FORM***-->
  <div class="container">
-      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>main/reset_password_validation">
+      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>out/reset_password_validation">
       		<span class="text text-danger"><?php echo validation_errors(); ?></span>
 	      	
 	        <h3 class="form-signin-heading visible-desktop"><i class="fa fa-lock"></i>Reset password</h3>
@@ -10,7 +10,7 @@
 	        <br><br>
 	        <div>
 	       	<input type="submit" class="btn btn-large btn-danger" value="Reset password">
-	        	 <a href="<?php echo base_url();?>main/login" class="footer-text">Back to login</a>
+	        	 <a href="<?php echo base_url();?>out/login" class="footer-text">Back to login</a>
 	       </div>
 	        
       </form>

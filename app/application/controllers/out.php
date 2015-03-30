@@ -215,21 +215,27 @@ Public |Non-Authorised members function helpers only
 
 		$configs = array(
 				array(
+						"field" => "first_name",
+						"label" => "First Name",
+						"rules" => "required|trim|xss_clean"
+					),
+
+				array(
+						"field" => "surname",
+						"label" => "Surname",
+						"rules" => "required|trim|xss_clean"
+					),
+
+				array(
 						"field" => "id_number",
 						"label" => "ID Number",
-						"rules" => "required|trim|xss_clean|is_unique[members.id_number]"
+						"rules" => "required|trim|xss_clean|min_length[8]"
 					),
 
 				array(
-						"field" => "password",
-						"label" => "Password",
-						"rules" => "required|trim|"
-					),
-
-				array(
-						"field" => "conf_password",
-						"label" => "Confirm Password",
-						"rules" => "required|trim|matches[password]"
+						"field" => "email_address",
+						"label" => "Email Address",
+						"rules" => "required|trim|valid_email"
 					)
 			);
 
@@ -246,7 +252,6 @@ Public |Non-Authorised members function helpers only
 				"title" => "Naxxserian &middot; Sign Up"
 			);
 
-			echo "<span class='alert alert-error'>Couldn't sign you up.</span>";
 			$this->_load_view($data);
 		}
 	}

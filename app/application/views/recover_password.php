@@ -2,7 +2,7 @@
 	/*Enable password reset from email link*/
 ?>
  <div class="container offset-top">
-      <form class="form-signin font-family form-group" method="POST" action="<?php echo base_url();?>main/update_password" id="login-form-auth">
+      <form class="form-signin font-family form-group" method="POST" action="<?php echo base_url();?>out/update_password" id="login-form-auth">
       		<span class="text text-danger"><?php echo validation_errors(); ?></span>
 	      	
 	       <h3 class="form-signin-heading visible-desktop"><i class="fa fa-lock"></i>Reset password</h3>

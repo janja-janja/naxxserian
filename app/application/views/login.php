@@ -38,7 +38,7 @@
 		        <br><br>
 		        <div>
 		        	<input type="submit" class="btn btn-large btn-success" value="Login">&nbsp;&nbsp;&nbsp;
-		        	 <a href="<?php echo base_url();?>main/reset_password" class="footer-text">Forgot password?</a>
+		        	 <a href="<?php echo base_url();?>out/reset_password" class="footer-text">Forgot password?</a>
 		       </div>
 		        
 	      </form>

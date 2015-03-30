@@ -1,29 +1,26 @@
+<div class="container offset-top">
 
-<h3>Sign up here</h3>
-<div class="nax-signup">
-	<?php
-		echo form_open('main/signup_validation');
-		echo validation_errors();
+	<form class="form-signin font-family" method="POST" action="<?php echo base_url();?>out/signup_validation" id="login-form-auth">
+      		<span class="text text-danger strong"><?php echo validation_errors(); ?></span>
+	      	
+	        <h3 class="form-signin-heading visible-desktop">Sign up Area</h3>
+	        
+	        <label for="first_name">First Name</label>
+	        <input type="text" class="input-block-level" placeholder="Enter Firstname" name="first_name" value="<?php echo($this->input->post('first_name')) ?>" id="first_name"/>
 
-		echo"<p>ID number: ";
-		echo form_input('id_number', $this->input->post('id_number'));
-		echo "</p>";
+	         <label>Surname</label>
+	        <input type="text" class="input-block-level" placeholder="Enter Surname" name="surname" value="<?php echo($this->input->post('surname')) ?>"/>
 
-		echo"<p>Password: ";
-		echo form_password('password');
-		echo "</p>";
-
-		echo"<p>Confirm Password: ";
-		echo form_password('conf_password');
-		echo "</p>";
-
-		echo"<p>";
-		echo form_submit('signup_submit', 'Sign up');
-		echo "</p>";
-
-		echo form_close();
-
-
-	?>
-	<a href='<?php echo base_url()."main/login"; ?>'>Login</a>
+	         <label>ID Number</label>
+	        <input type="text" class="input-block-level" placeholder="Enter ID number" name="id_number" value="<?php echo($this->input->post('id_number')) ?>"/>
+	        
+	         <label>Email Address</label>
+	        <input type="text" class="input-block-level" placeholder="Enter Email Address" name="email_address" value="<?php echo($this->input->post('email_address')) ?>"/>
+	       
+	        
+	        <br><br>
+	        	<input type="submit" class="btn btn-large btn-success" value="Request Sign Up"/>
+	        	&nbsp;&nbsp;&nbsp;
+	        	
+      </form>
 </div>

@@ -70,3 +70,6 @@ li.active-inverse a.white:hover{
 .pointer{
 	cursor: pointer;
 }
+.strong{
+	font-weight: bold;
+}
