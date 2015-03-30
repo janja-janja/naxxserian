@@ -60,7 +60,7 @@ Authorised members function helpers only
 		else
 		{
 			$data = array(
-					"main" => "login",
+					"out" => "login",
 					"title" => "Naaxserian &middot; Home"
 				);
 			$this->_load_view($data);
@@ -126,7 +126,7 @@ Authorised members function helpers only
 		else
 		{
 			$data = array(
-					"main" => "login",
+					"out" => "login",
 					"title" => "Naxxserian &middot; Login"
 				);
 			
@@ -141,7 +141,7 @@ Authorised members function helpers only
 	*/
 	{
 		$this->session->sess_destroy();
-		redirect('main/home');
+		redirect('out/');
 	}
 
 	public function change_password()
