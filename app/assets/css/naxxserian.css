@@ -67,3 +67,6 @@ li.active-inverse a.white:hover{
 .offset-margin{
 	margin-top: 50px;
 }
+.pointer{
+	cursor: pointer;
+}

@@ -27,67 +27,102 @@ class Main extends CI_Controller {
 
 	public function change_password()
 	{
-		$this->load->library("form_validation");
-
-		$config = array(
-				array(
-						"field" => "member_old_password",
-						"label" => "<b>Old Password</b>",
-						"rules" => "required|trim"
-					),
-
-				array(
-						"field" => "member_new_password",
-						"label" => "<b>New Password</b>",
-						"rules" => "required|trim"
-					),
-
-				array(
-						"field" => "member_conf_new_password",
-						"label" => "<b>Confirm New Password</b>",
-						"rules" => "required|trim|matches[member_new_password]"
-					)
-			);
-
-		$this->form_validation->set_rules($config);
-
-		if($this->form_validation->run())
+		if($this->session->userdata("is_logged_in"))
+			/*logged in member*/
 		{
-			/*code here to update pass*/
-			$new_password = $this->input->post("member_new_password");
-			$old_password = $this->input->post("member_old_password");
-			$unique_id = $this->session->all_userdata()["id_number"];
+			$this->load->library("form_validation");
 
-			/*check if old password is correct*/
-			if($this->model_users->password_is_valid())
+			$config = array(
+					array(
+							"field" => "member_old_password",
+							"label" => "<b>Old Password</b>",
+							"rules" => "required|trim"
+						),
+
+					array(
+							"field" => "member_new_password",
+							"label" => "<b>New Password</b>",
+							"rules" => "required|trim|min_length[6]"
+						),
+
+					array(
+							"field" => "member_conf_new_password",
+							"label" => "<b>Confirm New Password</b>",
+							"rules" => "required|trim|matches[member_new_password]"
+						)
+				);
+
+			$this->form_validation->set_rules($config);
+
+			if($this->form_validation->run())
 			{
-				/*update password*/
-				if ($this->update_password($new_password, $unique_id))
+				/*code here to update pass*/
+				$new_password = $this->input->post("member_new_password");
+				$old_password = $this->input->post("member_old_password");
+				$unique_id = $this->session->all_userdata()["id_number"];
+
+				/*check if old password is correct*/
+				if($this->model_users->password_is_valid())
 				{
-					echo "<h5 class='alert alert-success'>Password updated</h5>";
+					/*update password*/
+					if ($this->update_password($new_password))
+					{
+						$success = "<h4 class='alert alert-success'> Password has been updated successfuly. </h4>";/*echo in members when password has been succsessfuly updated*/
+
+						$data = array(
+								"main" => "members",
+								"title" => "Naxxserian &middot; Members",
+								"password_feedback" => $success
+							);
+
+						$this->_load_view($data);
+
+					}
+					else
+					{
+						$success = "<h4 class='alert alert-danger scroll-to-password-field pointer'> Something went wrong. Please click here to try again.</h4>";/*echo in members when password has been succsessfuly updated*/
+
+						$data = array(
+								"main" => "members",
+								"title" => "Naxxserian &middot; Members",
+								"password_feedback" => $success
+							);
+
+						$this->_load_view($data);
+					}
 				}
 				else
 				{
-					echo "<h5 class='alert alert-danger'>Something went wrong :( </h5>";
+					/*old password incorrect*/
+					$success = "<h4 class='alert alert-danger scroll-to-password-field pointer'>Wrong old password :( Click here to edit again</h4>";
+						/*echo in members when password has been succsessfuly updated*/
+
+						$data = array(
+								"main" => "members",
+								"title" => "Naxxserian &middot; Members",
+								"password_feedback" => $success
+							);
+
+						$this->_load_view($data);
 				}
+				
 			}
 			else
 			{
-				/*old password incorrect*/
-				echo "<h5 class='alert alert-danger'>Incorrect Old password!</h5>";
-				echo $unique_id;
-				echo "<br>".($old_password);
+				$data = array(
+						"main" => "members",
+						"title" => "Naxxserian &middot; Members",
+						"password_feedback" => ""
+					);
+				$this->_load_view($data);
 			}
-			
 		}
 		else
 		{
-			$data = array(
-					"main" => "members",
-					"title" => "Naxxserian &middot; Members"
-				);
-			$this->_load_view($data);
+			/*public*/
+			redirect("main/members");
 		}
+		
 	}
 
 	public function home()
@@ -498,7 +533,7 @@ class Main extends CI_Controller {
 		
 	}
 
-	public function update_password()
+	public function update_password($password)
 	/*
 	Update new user password to the database
 	*/
@@ -506,7 +541,6 @@ class Main extends CI_Controller {
 		if($this->session->userdata("is_logged_in"))
 		{
 			/*logged in members password reset. Use session vars*/
-			$password = $this->input->post("new_password");
 			$unique_id = $this->session->all_userdata()["id_number"];
 
 			if($this->model_users->make_changes($password, $unique_id))
@@ -530,7 +564,8 @@ class Main extends CI_Controller {
 		{
 			$data = array(
 					"main" => "members",
-					"title" => "Naxxserian &middot; Members"
+					"title" => "Naxxserian &middot; Members",
+					"password_feedback" => ""
 				);
 			
 			$this->_load_view($data);

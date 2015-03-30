@@ -5,6 +5,10 @@
 
 	<div class="well col-lg-10">
 		<!-- Photo details -->
+		<?php 
+			echo $password_feedback; 
+		?>
+
 		<h4><i class="fa fa-camera"></i>Photo Details</h4>
 		<img src="#" class="img img-responsive img-polaroid">
 		<form method="POST" enctype="multipart/form-data">
@@ -33,11 +37,11 @@
 		<!-- Change password -->
 		<h4><i class="fa fa-lock"></i>Change Password</h4>
 		<span class="text text-danger"><?php echo validation_errors(); ?></span>
-		<form method="POST" class="form-group" action="<?php echo base_url();?>main/change_password">
+		<form method="POST" class="form-group" action="<?php echo base_url();?>main/change_password" id="scroll-to-password-field">
 			<label for="old_password">Old Password</label> 
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-				<input type="password" name="member_old_password" class="col-lg-12 form-control">
+				<input type="password" id = "member_old_password" name="member_old_password" class="col-lg-12 form-control">
 			</div>
 			<br>
 
