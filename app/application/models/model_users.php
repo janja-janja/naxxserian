@@ -51,6 +51,24 @@
  		}
  	}
 
+ 	public function make_changes($new_password, $unique_id)
+ 	/*
+	Make new changes to the db to the unique id
+	@params string(), int(unique id)
+	@retutn boolean
+ 	*/
+ 	{
+ 		 $data = array(
+         'password' => sha1($new_password)
+
+      );
+
+		$this->db->where('id_number', $unique_id);
+		$this->db->update('members', $data) ? return true : return false;
+ 	}
+ 	
+
+
  	public function days_till_event()
  	{
 

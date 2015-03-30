@@ -438,6 +438,7 @@ class Main extends CI_Controller {
 	*/
 	{
 		if(!$this->session->userdata("is_logged_in"))
+			/*allow recovery only on non-loggeed in members*/
 		{
 			$data = array(
 					"main" => "recover_password",
@@ -449,6 +450,30 @@ class Main extends CI_Controller {
 		else
 		{
 			redirect("main/members");
+		}
+		
+	}
+
+	public function update_password()
+	/*
+	Update new user password to the database
+	*/
+	{
+		if($this->session->userdate("is_logged_in"))
+		{
+			/*logged in members password reset. Use session vars*/
+			$password = $this->input->post("new_password");
+			$unique_id = $this->session->all_userdata["id_number"];
+
+			if($this->model_users->make_changes($password, $unique_id))
+			{
+				echo "Update done";
+			}
+			else echo "Not updated";
+		}
+		else
+		{
+			/*non-logged in member. Use email address*/
 		}
 		
 	}
