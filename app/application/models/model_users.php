@@ -15,6 +15,33 @@
  		}
  	}
 
+ 	public function get_details($column, $unique_id)
+ 	/*
+	Get a specific field of a user
+	@params - > sting(table name), string(column), int(primary key)
+ 	*/
+ 	{
+ 		$details = $this->db->query("SELECT $column FROM members WHERE id_number = $unique_id");
+ 		if($details)
+ 		{
+ 			return ucfirst($this->array_to_single($details, $column));
+ 		}
+ 	}
+
+ 	private function array_to_single($array, $column)
+	/*
+	Array to  single value
+	$params -> array(object array from db), string(column name)
+	$return single value(int/string)
+	*/
+	{
+		foreach($array->result() as $key)
+		{
+			$value = $key->$column;
+		}
+		return $value;
+	}
+
  	public function can_log_in()
  	{
  		$this->db->where('id_number', $this->input->post('id_number'));

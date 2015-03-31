@@ -11,8 +11,7 @@ Authorised members function helpers only
 	{
 		parent::__construct();
 
-		#load views and models on startup
-		#$this->load->view('inc/template');
+		#load models on startup
 		$this->load->model('model_users');
 		$data = array(
 				"title" => "Naxxserian Investment Enterprise"

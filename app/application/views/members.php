@@ -7,6 +7,13 @@
 		<!-- Photo details -->
 		<?php 
 			echo $password_feedback; 
+			$logged_in_member = $this->session->all_userdata()["id_number"];
+
+			$firstname = $this->model_users->get_details('first_name', $logged_in_member);
+			$middlename = $this->model_users->get_details('middle_name', $logged_in_member);
+			$surname = $this->model_users->get_details('surname', $logged_in_member);
+
+			$fullname = $firstname.' '.$middlename.' '.$surname;
 		?>
 
 		<h4><i class="fa fa-camera"></i>Photo Details</h4>
@@ -21,17 +28,10 @@
 
 		<!-- Personal info -->
 		<h4><i class="fa fa-user"></i>Personal Information</h4>
-		<label for="first_name">First Name:</label> 
-		<input type="text" id="first_name" class="col-lg-12 form-control">
+		<label for="first_name">Full Name</label> 
+		<input type="text" id="first_name" class="col-lg-12 form-control" value="<?php echo $fullname; ?>" disabled>
 		<br><br><br><br>
 
-		<label for="middle_name">Middle Name:</label> 
-		<input type="text" id="middle_name" class="col-lg-12 form-control">
-		<br><br><br><br>
-
-		<label for="surname">Surname:</label>  
-		<input type="text" id="surname"class="col-lg-12 form-control"> 
-		<br><br><br><br> 
 		<hr class="hrDividerBetween">
 
 		<!-- Change password -->
