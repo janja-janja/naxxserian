@@ -20,6 +20,7 @@ Public |Non-Authorised members function helpers only
 			);
 		$this->session->userdata("is_logged_in") ? redirect("auth/home"): '';
 	}
+	
 	public function _load_view($data){
 		$this->load->view("inc/template", $data);
 	}

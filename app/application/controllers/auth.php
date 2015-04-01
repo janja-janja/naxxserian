@@ -17,9 +17,10 @@ Authorised members function helpers only
 				"title" => "Naxxserian Investment Enterprise"
 			);
 
-		!$this->session->userdata("is_logged_in") ? redirect("public/gallery"): '';
+		!$this->session->userdata("is_logged_in") ? redirect("out/"): '';
 
 	}
+
 	public function _load_view($data){
 		$this->load->view("inc/template", $data);
 	}
@@ -241,6 +242,26 @@ Authorised members function helpers only
 			redirect("auth/members");
 		}
 		
+	}
+
+	public function upload()
+	/*
+	Upload user photo()
+	*/
+	{
+		if($this->session->userdata("is_logged_in"))
+		{
+			$data = array(
+					"auth" => "upload",
+					"title" => "Uploading Photo..."
+				);
+
+			$this->_load_view($data);
+		}
+		else
+		{
+			redirect("out/");
+		}
 	}
 
 

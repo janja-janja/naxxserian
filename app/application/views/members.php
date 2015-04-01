@@ -18,7 +18,7 @@
 
 		<h4><i class="fa fa-camera"></i>Photo Details</h4>
 		<img src="#" class="img img-responsive img-polaroid">
-		<form method="POST" enctype="multipart/form-data">
+		<form method="POST" enctype="multipart/form-data" action="<?php echo base_url(); ?>auth/upload">
 			<input type="file" name="user_image"/>
 			<h5 class='picture-msg'>Upload a picture to be your avatar.</h5>
 			<h6 class='picture-msg-small'>Allowed Formats: jpg, jpeg, png</h6>
