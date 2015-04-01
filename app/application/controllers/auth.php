@@ -251,12 +251,39 @@ Authorised members function helpers only
 	{
 		if($this->session->userdata("is_logged_in"))
 		{
-			$data = array(
-					"auth" => "upload",
-					"title" => "Uploading Photo..."
+			$image_field = $this->input->post("user_image");
+
+			$config = array(
+						array(
+								"field" => "user_image",
+								"label" => "Image Picker",
+								"rules" => "required"
+							)
 				);
 
-			$this->_load_view($data);
+			$this->load->library("form_validation");
+			$this->form_validation->set_rules($config);
+
+			if($this->form_validation->run())
+			{
+				$data = array(
+						"auth" => "upload",
+						"title" => "Uploading Photo..."
+					);
+
+				$this->_load_view($data);
+			}
+			else
+			{
+				$data = array(
+						"auth" => "members",
+						"title" => "Photo Uploader...",
+						"password_feedback" => ""
+					);
+
+				$this->_load_view($data);
+			}
+
 		}
 		else
 		{

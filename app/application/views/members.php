@@ -17,6 +17,17 @@
 		?>
 
 		<h4><i class="fa fa-camera"></i>Photo Details</h4>
+		<span class="text text-danger">
+			<?php 
+
+			if($this->uri->segment(2) == "upload")
+			{
+				echo validation_errors(); 
+			}
+
+			?>
+
+		</span>
 		<img src="#" class="img img-responsive img-polaroid">
 		<form method="POST" enctype="multipart/form-data" action="<?php echo base_url(); ?>auth/upload">
 			<input type="file" name="user_image"/>
@@ -36,7 +47,17 @@
 
 		<!-- Change password -->
 		<h4><i class="fa fa-lock"></i>Change Password</h4>
-		<span class="text text-danger"><?php echo validation_errors(); ?></span>
+		<span class="text text-danger">
+			<?php 
+
+			if($this->uri->segment(2) == "change_password")
+			{
+				echo validation_errors(); 
+			}
+
+			?>
+
+		</span>
 		<form method="POST" class="form-group" action="<?php echo base_url();?>auth/change_password" id="scroll-to-password-field">
 			<label for="old_password">Old Password</label> 
 			<div class="input-group">
