@@ -14,6 +14,8 @@
  			return $details;
  		}
  	}
+ 	/*end user_details*/
+
 
  	public function get_details($column, $unique_id)
  	/*
@@ -27,6 +29,7 @@
  			return ucfirst($this->array_to_single($details, $column));
  		}
  	}
+ 	/*end get_details*/
 
  	private function array_to_single($array, $column)
 	/*
@@ -41,6 +44,7 @@
 		}
 		return $value;
 	}
+	/*end array_to_single*/
 
  	public function can_log_in()
  	{
@@ -58,6 +62,7 @@
  			return false;
  		}
  	}
+ 	/*end can_log_in*/
 
  	public function password_is_valid()
  	/*
@@ -80,6 +85,7 @@
  			return false;
  		}
  	}
+ 	/*end password_is_valid*/
 
  	public function is_a_member($email_address)
  	/*
@@ -100,6 +106,7 @@
  			return false;
  		}
  	}
+ 	/*end is_a_member*/
 
  	public function make_changes($new_password, $unique_id)
  	/*
@@ -122,6 +129,37 @@
 			return false;
 		}
  	}
+ 	/*end make_changes*/
+
+
+ 	public function upload_photo($image_name)
+ 	/*
+	Update photo column in the db
+ 	*/
+ 	{
+ 		$unique_id = $this->session->all_userdata()["id_number"];
+
+ 		$data = array(
+ 				"photo" => $image_name
+ 			);
+
+ 		$this->db->where("id_number", $unique_id);
+
+ 		if($this->db->update("members", $data))
+ 		{
+ 			return true;
+ 		}
+ 		else
+ 		{
+ 			return false;
+ 		}
+ 	}
+ 	/*end upload_photo*/
+
+
+
+
+
 
 
 

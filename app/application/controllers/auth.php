@@ -242,7 +242,7 @@ Authorised members function helpers only
 			redirect("auth/members");
 		}
 		
-	}
+	}/*end change_password*/
 
 	public function upload()
 	/*
@@ -251,37 +251,71 @@ Authorised members function helpers only
 	{
 		if($this->session->userdata("is_logged_in"))
 		{
-			$image_field = $this->input->post("user_image");
+			$member_id = $this->session->all_userdata()["id_number"];
+			$date = date("Y-m-d H:i:s");
+
+			$filename = sha1($member_id.$date);
 
 			$config = array(
-						array(
-								"field" => "user_image",
-								"label" => "Image Picker",
-								"rules" => "required"
-							)
+					"upload_path" => "images/",
+					"allowed_types" => "jpg|png|jpeg",
+					"max_size" => "2048",
+					"max_width" => "1024",
+					"max_height" => "768",
+					"file_name" => $filename
 				);
 
-			$this->load->library("form_validation");
-			$this->form_validation->set_rules($config);
+			$this->load->library("upload", $config);
+			$iamge_field_name = "user_image";
 
-			if($this->form_validation->run())
+			if(!$this->upload->do_upload($iamge_field_name))
 			{
+				$errors = "<h4 class='text text-danger'>".$this->upload->display_errors()."</h4>";
+
 				$data = array(
-						"auth" => "upload",
-						"title" => "Uploading Photo..."
+						"auth" => "members",
+						"title" => "Photo Uploader",
+						"photo_feedback" => $errors
 					);
 
 				$this->_load_view($data);
+
 			}
 			else
 			{
-				$data = array(
+				/*Get previous photo and delete it*/
+				$previous_photo = $this->model_users->get_details("photo", $member_id);
+				unlink("images/".$previous_photo);
+
+
+   			/*update DB(photo field*/
+   			$filename = $this->upload->data()["file_name"];
+
+				if($this->model_users->upload_photo($filename))
+				{/*DB updated*/
+					$success = "<h4 class='text text-success'>Photo has been updated successfuly</h4>";
+
+					$data = array(
 						"auth" => "members",
-						"title" => "Photo Uploader...",
-						"password_feedback" => ""
+						"title" => "Photo Uploader",
+						"photo_feedback" => $success
 					);
 
-				$this->_load_view($data);
+					$this->_load_view($data);
+				}
+				else
+				{/*DB not updated*/
+					$error = "<h4 class='text text-danger'>Photo upload failed.</h4>";
+
+					$data = array(
+						"auth" => "members",
+						"title" => "Photo Uploader",
+						"photo_feedback" => $error
+					);
+
+					$this->_load_view($data);
+				}
+
 			}
 
 		}
@@ -289,7 +323,7 @@ Authorised members function helpers only
 		{
 			redirect("out/");
 		}
-	}
+	}/*end upload*/
 
 
 

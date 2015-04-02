@@ -6,7 +6,18 @@
 	<div class="well col-lg-10">
 		<!-- Photo details -->
 		<?php 
-			echo $password_feedback; 
+			
+			if($this->uri->segment(2) == "change_password")
+			{
+				echo $password_feedback;
+			}
+
+			if($this->uri->segment(2) == "upload")
+			{
+				echo $photo_feedback;
+			}
+			
+
 			$logged_in_member = $this->session->all_userdata()["id_number"];
 
 			$firstname = $this->model_users->get_details('first_name', $logged_in_member);
