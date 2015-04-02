@@ -26,7 +26,7 @@
  		$details = $this->db->query("SELECT $column FROM members WHERE id_number = $unique_id");
  		if($details)
  		{
- 			return ucfirst($this->array_to_single($details, $column));
+ 			return $this->array_to_single($details, $column);
  		}
  	}
  	/*end get_details*/

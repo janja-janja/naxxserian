@@ -260,8 +260,8 @@ Authorised members function helpers only
 					"upload_path" => "images/",
 					"allowed_types" => "jpg|png|jpeg",
 					"max_size" => "2048",
-					"max_width" => "1024",
-					"max_height" => "768",
+					"max_width" => "2048",
+					"max_height" => "1538",
 					"file_name" => $filename
 				);
 
@@ -283,10 +283,14 @@ Authorised members function helpers only
 			}
 			else
 			{
-				/*Get previous photo and delete it*/
-				$previous_photo = $this->model_users->get_details("photo", $member_id);
-				unlink("images/".$previous_photo);
 
+				/*previous photo*/
+				$previous_photo = $this->model_users->get_details("photo", $member_id);
+				/*delete the previous photo*/	
+				if($previous_photo != "naxxserian.default.photo.naxxserian.png")
+				{
+					unlink("images/".$previous_photo);
+				}
 
    			/*update DB(photo field*/
    			$filename = $this->upload->data()["file_name"];
@@ -302,6 +306,7 @@ Authorised members function helpers only
 					);
 
 					$this->_load_view($data);
+				
 				}
 				else
 				{/*DB not updated*/

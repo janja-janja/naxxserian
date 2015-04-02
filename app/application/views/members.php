@@ -23,8 +23,10 @@
 			$firstname = $this->model_users->get_details('first_name', $logged_in_member);
 			$middlename = $this->model_users->get_details('middle_name', $logged_in_member);
 			$surname = $this->model_users->get_details('surname', $logged_in_member);
+			$photoname = $this->model_users->get_details('photo', $logged_in_member);
 
-			$fullname = $firstname.' '.$middlename.' '.$surname;
+
+			$fullname = ucfirst($firstname).' '.ucfirst($middlename).' '.ucfirst($surname);
 		?>
 
 		<h4><i class="fa fa-camera"></i>Photo Details</h4>
@@ -39,7 +41,7 @@
 			?>
 
 		</span>
-		<img src="#" class="img img-responsive img-polaroid">
+		<img src="<?php echo base_url().'images/'.$photoname ;?>" class="img img-circle img-responsive" width="150">
 		<form method="POST" enctype="multipart/form-data" action="<?php echo base_url(); ?>auth/upload">
 			<input type="file" name="user_image"/>
 			<h5 class='picture-msg'>Upload a picture to be your avatar.</h5>
