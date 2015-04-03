@@ -253,11 +253,12 @@ Authorised members function helpers only
 		{
 			$member_id = $this->session->all_userdata()["id_number"];
 			$date = date("Y-m-d H:i:s");
+			$upload_path = "images/";
 
 			$filename = sha1($member_id.$date);
 
 			$config = array(
-					"upload_path" => "images/",
+					"upload_path" => $upload_path,
 					"allowed_types" => "jpg|png|jpeg",
 					"max_size" => "2048",
 					"max_width" => "2048",
@@ -289,7 +290,7 @@ Authorised members function helpers only
 				/*delete the previous photo*/	
 				if($previous_photo != "naxxserian.default.photo.naxxserian.png")
 				{
-					unlink("images/".$previous_photo);
+					unlink($upload_path.$previous_photo);
 				}
 
    			/*update DB(photo field*/
@@ -330,7 +331,29 @@ Authorised members function helpers only
 		}
 	}/*end upload*/
 
+	public function loans()
+	/*
+	Allows members to request for loans
+	*/
+	{
+		if($this->session->userdata("is_logged_in"))
+		{
+			/*authorised member*/
+			$data = array(
+					"auth" => "request_loan",
+					"title" => "Request Loan"
+				);
+
+			$this->_load_view($data);
+		}
+		else
+		{
+			/*non-member(public)*/
+			redirect("out/");
+		}
+	}/*end loans()*/
 
 
 
-}/*end of Class*/
+
+}/*end of class Auth*/
