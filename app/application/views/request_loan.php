@@ -16,11 +16,11 @@
 
 
 <div class="container offset-top">
-	<h3 class="col-lg-offset-3">Request Loan</h3>
+	<h3 class="col-lg-offset-4 text text-danger">Request For A Loan</h3>
 
 	<!-- loan.fill.in.form -->
 		<form method="POST" action="" class="well col-md-10 col-md-offset-1">
-			<h4 class="text text-warning">Loaness Details</h4>
+			<h4 class="text text-warning">Loanee Details</h4>
 			<hr class="hrDividerBetween">
 			<label for="loaneeName">Loanee name</label>
 			<input type="text" class="col-lg-12 form-control" disabled="disabled" value="<?php echo $fullname; ?>" id="loaneeName"/>
