@@ -19,7 +19,17 @@
 	<h3 class="col-lg-offset-4 text text-danger">Request For A Loan</h3>
 
 	<!-- loan.fill.in.form -->
-		<form method="POST" action="" class="well col-md-10 col-md-offset-1">
+		<form method="POST" action="<?php echo base_url(); ?>auth/validate_loan" class="well col-md-10 col-md-offset-1">
+
+			<?php 
+				if($this->uri->segment(2) == "validate_loan")
+				{
+					echo $loan_feedback;
+					echo "<span class='text text-danger'><strong>".validation_errors()."</strong></span>";
+				}
+
+			 ?>
+
 			<h4 class="text text-warning">Loanee Details</h4>
 			<hr class="hrDividerBetween">
 			<label for="loaneeName">Loanee name</label>
@@ -36,7 +46,7 @@
 			<hr class="hrDividerBetween">
 			
 			<label for="guarantorDetails">Pick your guarantor</label>
-			<select id='guarantorDetails' class="col-lg-12 form-control">
+			<select id='guarantorDetails' class="col-lg-12 form-control" name="guarantorDetails">
 				<option value="">Choose your guarantor...</option>
 				<?php
 						$members = $this->model_users->get_all_members();
@@ -68,8 +78,8 @@
 			<hr class="hrDividerBetween">
 			
 			<label for="loanType">Loan type</label>
-			<select id="loanType" class="col-lg-12 form-control">
-				<option value="empty">Choose loan type...</option>
+			<select id="loanType" class="col-lg-12 form-control" name="loanType">
+				<option value="">Choose loan type...</option>
 				<option value="compulsoryLoan">Compulsory loan (2000 Min - 7000 Max)</option>
 				<option value="optionalLoan">Optional loan (5000 Min - [Loanee savings + guarantor savings] Max)</option>
 			</select>
@@ -78,12 +88,12 @@
 			<input type="hidden" id="optionalLoanLimit"/>
 			
 			<label for="loanAmount" id="loanAmountHint">Loan amount</label>
-			<input type="text" class="col-lg-12 form-control numberInputValidation" id="loanAmmount" placeholder="Enter loan amount."/>
+			<input type="text" class="col-lg-12 form-control numberInputValidation" id="loanAmmount" placeholder="Enter loan amount." name="loanAmmount"/>
 			<hr class="hrDividerDotted">
 			
 			<br><br>
 			<input type="button" class="btn btn-danger" value="Cancel" id="cancelLoanBtn"/>
-			<input type="button" class="btn btn-success" value="Apply loan" id="applyLoanBtn"/>
+			<input type="submit" class="btn btn-success" value="Apply loan" id="applyLoanBtn"/>
 		</div>
 		<hr class="hrDividerBetween">
 		

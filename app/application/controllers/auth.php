@@ -353,6 +353,60 @@ Authorised members function helpers only
 		}
 	}/*end loans()*/
 
+	public function validate_loan()
+	/*
+	Allow members to request for a loan
+	*/
+	{
+		$this->load->library("form_validation");
+
+		$config = array(
+				array(
+						"field" => "guarantorDetails",
+						"label" => "Loan Guarantor",
+						"rules" => "required"
+					),
+
+				array(
+						"field" => "loanType",
+						"label" => "Loan Type",
+						"rules" => "required"
+					),
+
+				array(
+						"field" => "loanAmmount",
+						"label" => "Loan Amount",
+						"rules" => "required"
+					)
+			);
+
+		$this->form_validation->set_rules($config);
+
+		if($this->form_validation->run())
+		{
+			$loan_feedback = "<h4 class='alert alert-success'>All data is set :)</h4>";
+
+			$data = array(
+					"auth" => "request_loan",
+					"title" => "Request Loan",
+					"loan_feedback" => $loan_feedback
+				);
+
+			$this->_load_view($data);
+		}
+		else
+		{
+	
+			$data = array(
+					"auth" => "request_loan",
+					"title" => "Request Loan",
+					"loan_feedback" => ""
+				);
+
+			$this->_load_view($data);
+		}
+	}
+
 
 
 
