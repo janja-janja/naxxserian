@@ -27,7 +27,7 @@
 			<br><br><br><br>
 			
 			<label for="loaneeID">Loanee ID Number</label>
-			<input type="text" class="col-lg-12 form-control" disabled="disabled" value="" id="loaneeID"/>
+			<input type="text" class="col-lg-12 form-control" disabled="disabled" value="<?php echo $id_number; ?>" id="loaneeID"/>
 			
 			
 			<hr class="hrDividerDotted">
@@ -39,7 +39,24 @@
 			<select id='guarantorDetails' class="col-lg-12 form-control">
 				<option value="">Choose your guarantor...</option>
 				<?php
-					
+						$members = $this->model_users->get_all_members();
+						$logged_in_member = $this->session->all_userdata()["id_number"];
+
+						foreach($members->result() as $key)
+						{
+							if($logged_in_member != $key->id_number)
+							{
+								$member_f_name = $key->first_name;
+								$member_m_name = $key->middle_name;
+								$member_s_name = $key->surname;
+								$member_id_number = $key->id_number;
+
+								$member_fullname = ucfirst($member_f_name).' '.ucfirst($member_m_name).' '.ucfirst($member_s_name);
+
+								echo("<option value='".$member_id_number."'>".$member_fullname."</option>");
+							}
+							
+						}
 				?>
 			</select>
 

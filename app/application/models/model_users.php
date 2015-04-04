@@ -157,6 +157,18 @@
  	/*end upload_photo*/
 
 
+ 	public function get_all_members()
+ 	/*
+	Get all members list
+	@return array
+ 	*/
+ 	{
+ 		$members = $this->db->get("members");
+ 		if($members)
+ 		{
+ 			return $members;
+ 		}
+ 	}/*end get_all_members()*/
 
 
 
