@@ -355,7 +355,7 @@ Authorised members function helpers only
 
 	public function validate_loan()
 	/*
-	Allow members to request for a loan
+	Validate member(s) loan fill ups
 	*/
 	{
 		$this->load->library("form_validation");
@@ -368,31 +368,56 @@ Authorised members function helpers only
 					),
 
 				array(
-						"field" => "loanType",
-						"label" => "Loan Type",
+						"field" => "repayment_period",
+						"label" => "Repayment Period",
 						"rules" => "required"
 					),
 
 				array(
 						"field" => "loanAmmount",
 						"label" => "Loan Amount",
-						"rules" => "required"
+						"rules" => "required|xss_clean"
 					)
 			);
+
+		$guarantor = $this->input->post("guarantorDetails");
+		$repayment_period = $this->input->post("repayment_period");
+		$amount = $this->input->post("loanAmmount");
+
 
 		$this->form_validation->set_rules($config);
 
 		if($this->form_validation->run())
 		{
-			$loan_feedback = "<h4 class='alert alert-success'>All data is set :)</h4>";
 
-			$data = array(
-					"auth" => "request_loan",
-					"title" => "Request Loan",
-					"loan_feedback" => $loan_feedback
-				);
+			/*insert loan_details to DB*/
+			$saved_to_db = $this->model_users->save_loan_details($guarantor, $amount, $repayment_period);
 
-			$this->_load_view($data);
+			if($saved_to_db)
+			{/*saved to DB*/
+				$loan_feedback = "<h4 class='alert alert-success'>Your loan request has been made. Your guarantor will be notified.</h4>";
+
+				$data = array(
+						"auth" => "request_loan",
+						"title" => "Request Loan",
+						"loan_feedback" => $loan_feedback
+					);
+
+				$this->_load_view($data);
+			}
+			else
+			{/*not saved to DB*/
+				$loan_feedback = "<h4 class='alert alert-success'>A problem occured while saving your loan details. Try again later.</h4>";
+
+				$data = array(
+						"auth" => "request_loan",
+						"title" => "Request Loan",
+						"loan_feedback" => $loan_feedback
+					);
+
+				$this->_load_view($data);
+			}
+
 		}
 		else
 		{

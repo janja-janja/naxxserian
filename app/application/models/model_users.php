@@ -115,11 +115,13 @@
 	@retutn boolean
  	*/
  	{
- 		 $data = array(
-         'password' => sha1($new_password)
-      );
+
+		$data = array(
+	     'password' => sha1($new_password)
+	  );
 
 		$this->db->where('id_number', $unique_id);
+
 		if($this->db->update('members', $data))
 		{
 			return true;
@@ -171,6 +173,31 @@
  	}/*end get_all_members()*/
 
 
+ 	public function save_loan_details($guanrator_id, $loan_amount, $repayment_period)
+ 	/*
+	Save loan details from loanee
+ 	*/
+ 	{	
+ 		$loanee_id = $this->session->all_userdata()["id_number"];
+ 		$date = date("Y-m-d H:i:s");
+
+ 		$data = array(
+ 				"loanee_id_number" => $loanee_id,
+ 				"guarantor_id_number" => $guanrator_id,
+ 				"amount" => $loan_amount,
+ 				"balance" => $loan_amount,
+ 				"application_date" => $date,
+ 				"repayment_period" => $repayment_period
+
+ 			);
+
+ 		$saved = $this->db->insert("loans", $data);
+ 		if($saved)
+ 		{
+ 			return true;
+ 		}
+ 		return false;
+ 	}/*end save_loan_details(x, y, z)*/
 
 
 
@@ -178,11 +205,6 @@
  	public function days_till_event()
  	{
 
-		/*$datetime1 = new DateTime('2015-03-02 10:00:00');
-		$datetime2 = new DateTime('2015-03-04 10:00:00');
-		$interval = $datetime1->diff($datetime2);
-		return $interval->format('%R%a days');
-*/
 		$date1 = date("Y-m-d H:i:s");
 		$date2 = "2015-03-04 10:00:00";
 		$seconds = strtotime($date2) - strtotime($date1);
@@ -218,4 +240,6 @@
 
 		return $hours;
 	}
- }
+
+
+ }/*end of model_users model*/

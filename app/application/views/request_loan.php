@@ -77,11 +77,12 @@
 			<h4 class="text text-warning">Loan Details</h4>
 			<hr class="hrDividerBetween">
 			
-			<label for="loanType">Loan type</label>
-			<select id="loanType" class="col-lg-12 form-control" name="loanType">
-				<option value="">Choose loan type...</option>
-				<option value="compulsoryLoan">Compulsory loan (2000 Min - 7000 Max)</option>
-				<option value="optionalLoan">Optional loan (5000 Min - [Loanee savings + guarantor savings] Max)</option>
+			<label for="repayment_period">Repayment Period</label>
+			<select id="repayment_period" class="col-lg-12 form-control" name="repayment_period">
+				<option value="">Choose repayment period...</option>
+				<option value="1">1 Month</option>
+				<option value="2">2 Months</option>
+				<option value="3-6">3 to 6 Months</option>
 			</select>
 			<br><br><br><br>
 			
