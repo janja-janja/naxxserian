@@ -201,6 +201,56 @@
 
 
 
+ 	public function check_loanee_status()
+ 	/*
+	check member(s) loan status
+	@return int
+ 	*/
+ 	{
+ 		$id_number = $this->session->all_userdata()["id_number"];
+
+ 		$loan_data = array(
+ 				"loanee_id_number" => $id_number,
+ 				"loan_verification" => 0,
+ 				"loan_status" => 0
+ 			);
+
+ 		$this->db->where($loan_data);
+
+ 		$query = $this->db->get("loans");
+
+ 		if($query->num_rows() == 1)
+ 		{
+ 			/*loanee not verified by guarantor. Deny loan fill in form*/
+ 			return 0;
+ 		}
+ 		elseif($query->num_rows() == 0)
+ 		{
+ 			/*check if loanee has been verified by guarantor.*/
+ 			$loan_data = array(
+ 				"loanee_id_number" => $id_number,
+ 				"loan_verification" => 1,
+ 				"loan_status" => 0
+ 			);
+
+ 			$this->db->where($loan_data);
+
+ 			$query = $this->db->get("loans");
+
+ 			if($query->num_rows() == 1)
+ 			{
+ 				/*loanee has been verified by guarantor. Deny loan fill in form.*/
+ 				return 1;
+ 			}
+ 			elseif(($query->num_rows() == 0)
+ 			{
+ 				/*member is not a loanee. Allow loan fill in form.*/
+ 				return 2;
+ 			}
+
+ 		}
+ 	}
+
 
  	public function days_till_event()
  	{

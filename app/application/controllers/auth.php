@@ -336,9 +336,32 @@ Authorised members function helpers only
 	Allows members to request for loans
 	*/
 	{
-		if($this->session->userdata("is_logged_in"))
+		/*check member loan status*/
+		$loanee_status = $this->model_users->check_loanee_status();
+
+		if($loanee_status == 0)
 		{
-			/*authorised member*/
+			/*loanee not verified by guarantor(Has already applied)*/
+			$data = array(
+					"auth" => "loanee_details",
+					"title" => "Loanee Details"
+				);
+
+			$this->_load_view($data);
+		}
+		elseif($loanee_status == 1)
+		{
+			/*loanee verified by guarantor(Has not paid his loan)*/
+			$data = array(
+					"auth" => "ver_loanee_details",
+					"title" => "Loanee Details"
+				);
+
+			$this->_load_view($data);
+		}
+		elseif($loanee_status == 2)
+		{
+			/*member is not a loanee*/
 			$data = array(
 					"auth" => "request_loan",
 					"title" => "Request Loan"
@@ -346,11 +369,8 @@ Authorised members function helpers only
 
 			$this->_load_view($data);
 		}
-		else
-		{
-			/*non-member(public)*/
-			redirect("out/");
-		}
+		
+		
 	}/*end loans()*/
 
 	public function validate_loan()
