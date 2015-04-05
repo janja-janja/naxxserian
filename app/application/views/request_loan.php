@@ -82,7 +82,7 @@
 				<option value="">Choose repayment period...</option>
 				<option value="1">1 Month</option>
 				<option value="2">2 Months</option>
-				<option value="3-6">3 to 6 Months</option>
+				<option value="3">3 to 6 Months</option>
 			</select>
 			<br><br><br><br>
 			

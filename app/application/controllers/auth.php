@@ -65,8 +65,6 @@ Authorised members function helpers only
 				);
 			$this->_load_view($data);
 		}
-		
-
 	}
 
 	private function array_to_single($array, $column)
@@ -104,7 +102,6 @@ Authorised members function helpers only
 		{
 			/*non-logged in member. Use email address*/
 		}
-		
 	}
 
 
@@ -240,8 +237,7 @@ Authorised members function helpers only
 		{
 			/*public*/
 			redirect("auth/members");
-		}
-		
+		}	
 	}/*end change_password*/
 
 	public function upload()

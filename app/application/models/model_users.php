@@ -270,8 +270,41 @@
  		$query = $this->db->get("loans");
 
  		return $this->array_to_single($query, "guarantor_id_number");
-
  	}
+
+ 	
+ 	public function get_loan_details($whose_detail)
+ 	/*
+	get loan amount, repayment period
+	@param string(loanee/guarantor)
+	@return object
+ 	*/
+ 	{
+ 		if($whose_detail == "loanee")
+ 		{/*get loanee details*/
+ 			$loanee_id = $this->session->all_userdata()["id_number"];
+
+	 		$data = array(
+	 				"loanee_id_number" => $loanee_id,
+	 				"loan_status" => 0,
+	 				"loan_verification" => 0
+	 			);
+
+	 		$this->db->select("amount, repayment_period");
+	 		$this->db->where($data);
+
+	 		return $this->db->get("loans");
+
+ 		}
+ 		
+ 	}/*end get_loan_details()*/
+
+
+
+
+
+
+
 
  	public function days_till_event()
  	{
@@ -287,10 +320,10 @@
 
 		$time_remaining = $hours.' hour'.$hrs_suffix;
 		return $time_remaining;
-
  	}
 
- 	public function date_difference () {
+ 	public function date_difference () 
+ 	{
  		$current_date = date("Y-m-dTH:i:s");
  		$date1 = new DateTime($current_date);
 		$date2 = new DateTime('2015-03-04T10:00:00');
