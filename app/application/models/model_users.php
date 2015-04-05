@@ -242,15 +242,36 @@
  				/*loanee has been verified by guarantor. Deny loan fill in form.*/
  				return 1;
  			}
- 			elseif(($query->num_rows() == 0)
+ 			elseif($query->num_rows() == 0)
  			{
  				/*member is not a loanee. Allow loan fill in form.*/
  				return 2;
  			}
 
  		}
- 	}
+ 	}/*end check_loanee_status()*/
 
+ 	public function get_guarantor_id()
+ 	/*
+	Get guarantor id given loanee_id
+	@return int
+ 	*/
+ 	{
+ 		$loanee_id = $this->session->all_userdata()["id_number"];
+
+ 		$loan_data = array(
+ 				"loanee_id_number" => $loanee_id,
+ 				"loan_verification" => 0,
+ 				"loan_status" => 0
+ 			);
+
+ 		$this->db->select("guarantor_id_number");
+ 		$this->db->where($loan_data);
+ 		$query = $this->db->get("loans");
+
+ 		return $this->array_to_single($query, "guarantor_id_number");
+
+ 	}
 
  	public function days_till_event()
  	{

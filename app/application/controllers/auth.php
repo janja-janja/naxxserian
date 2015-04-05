@@ -351,7 +351,7 @@ Authorised members function helpers only
 		}
 		elseif($loanee_status == 1)
 		{
-			/*loanee verified by guarantor(Has not paid his loan)*/
+			/*loanee verified by guarantor(Has not fully paid his loan)*/
 			$data = array(
 					"auth" => "ver_loanee_details",
 					"title" => "Loanee Details"
