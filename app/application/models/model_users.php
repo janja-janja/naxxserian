@@ -290,7 +290,7 @@
 	 				"loan_verification" => 0
 	 			);
 
-	 		$this->db->select("amount, repayment_period");
+	 		$this->db->select("amount, application_date");
 	 		$this->db->where($data);
 
 	 		return $this->db->get("loans");
@@ -322,11 +322,11 @@
 		return $time_remaining;
  	}
 
- 	public function date_difference () 
+ 	public function date_difference ($old_date) 
  	{
- 		$current_date = date("Y-m-dTH:i:s");
+ 		$current_date = date("Y-m-d H:i:s");
  		$date1 = new DateTime($current_date);
-		$date2 = new DateTime('2015-03-04T10:00:00');
+		$date2 = new DateTime($old_date);
 
 		// The diff-methods returns a new DateInterval-object...
 		$diff = $date2->diff($date1);
@@ -337,12 +337,8 @@
 		$mins = $diff->i;
 		$hours = $hours + ($diff->days*24);
 
-		$hrs_suffix = ($hours > 1) ? 's' : '';
-		$min_suffix = ($mins > 1) ? 's' : '';
 
-		$hours = $hours." hour".$hrs_suffix." ".$mins." minute".$min_suffix;
-
-		return $hours;
+		return ($hours * 60) + ($mins);
 	}
 
 
