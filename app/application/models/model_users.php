@@ -337,7 +337,36 @@
 	 		$this->db->select("amount, application_date");
 	 		$this->db->where($data);
 
-	 		return $this->db->get("loans");
+	 		$query = $this->db->get("loans");
+	 		if($query->num_rows() == 1)
+	 		{
+	 			/*unverified loan found*/
+	 			return $query;
+	 		}
+	 		elseif($query->num_rows() == 0)
+	 		{
+	 			/*check for a verified loan found*/
+	 			$data = array(
+	 				"loanee_id_number" => $id_number,
+	 				"loan_status" => 0,
+	 				"loan_verification" => 1
+	 			);
+
+		 		$this->db->select("amount, guarantor_id_number, application_date");
+		 		$this->db->where($data);
+
+		 		$query = $this->db->get("loans");
+
+		 		if($query->num_rows() == 1)
+		 		{
+		 			/*verified loan found*/
+		 			return $query;
+		 		}
+		 		elseif($query->num_rows() == 0)
+		 		{
+		 			/*verified loan found. This loan has been settled*/
+		 		}
+	 		}
 
  		}
  		elseif($whose_detail == "guarantor")
@@ -417,6 +446,48 @@
  	}
 
 
+
+ 	public function get_repayment_period($loan_amount, $application_date)
+ 	/*
+	Get repayment period, interest accrued and the interest rate used
+ 	*/
+ 	{
+ 		$details = [];
+
+ 		$days_with_loan = $this->date_difference($application_date);
+
+	  /*amount payable*/
+	  $passed_minutes = [44640, 89280, 133920];/*1 month, 2 months, above 3 months*/
+	  $interest_rates = [0.1, 0.2, 0.3];
+
+	  if($days_with_loan <= $passed_minutes[0])
+	  {
+	    $amount_payable = $loan_amount + ($interest_rates[0] * $loan_amount);
+	    $rate = $interest_rates[0] * 100;
+	    $repayment_period = $passed_minutes[0] / (60 * 24 * 31);
+
+	    $details = [$amount_payable, $rate, $repayment_period];
+	    return $details;
+	  }
+	  elseif($days_with_loan <= $passed_minutes[1])
+	  {
+	    $amount_payable = $loan_amount + ($interest_rates[1] * $loan_amount);
+	    $rate = $interest_rates[1] * 100;
+	    $repayment_period = $passed_minutes[1] / (60 * 24 * 31);
+
+	    $details = [$amount_payable, $rate, $repayment_period];
+	    return $details;
+	  }
+	  elseif(($days_with_loan <= $passed_minutes[2]) || ($days_with_loan >= $passed_minutes[2]))
+	  {
+	    $amount_payable = $loan_amount + ($interest_rates[2] * $loan_amount);
+	    $rate = $interest_rates[2] * 100;
+	    $repayment_period = $passed_minutes[2] / (60 * 24 * 31);
+
+	    $details = [$amount_payable, $rate, $repayment_period];
+	    return $details;
+	  }
+ 	}
 
 
  	public function days_till_event()

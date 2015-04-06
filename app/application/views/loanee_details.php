@@ -18,33 +18,13 @@
     $application_date = $key->application_date;
   }
 
-  $days_with_loan = $this->model_users->date_difference($application_date);
 
-  /*amount payable*/
-  $passed_minutes = [44640, 89280, 133920];/*1 month, 2 months, above 3 months*/
-  $interest_rates = [0.1, 0.2, 0.3];
+  /*repayment period*/
+  $repayment_array = $this->model_users->get_repayment_period($loan_amount, $application_date);
 
-  if($days_with_loan <= $passed_minutes[0])
-  {
-    $amount_payable = $loan_amount + ($interest_rates[0] * $loan_amount);
-    $rate = $interest_rates[0] * 100;
-    $repayment_period = $passed_minutes[0] / (60 * 24 * 31);
-
-  }
-  elseif($days_with_loan <= $passed_minutes[1])
-  {
-    $amount_payable = $loan_amount + ($interest_rates[1] * $loan_amount);
-    $rate = $interest_rates[1] * 100;
-    $repayment_period = $passed_minutes[1] / (60 * 24 * 31);
-
-  }
-  elseif(($days_with_loan <= $passed_minutes[2]) || ($days_with_loan >= $passed_minutes[2]))
-  {
-    $amount_payable = $loan_amount + ($interest_rates[2] * $loan_amount);
-    $rate = $interest_rates[2] * 100;
-    $repayment_period = $passed_minutes[2] / (60 * 24 * 31);
-
-  }
+  $amount_payable = $repayment_array[0];
+  $rate = $repayment_array[1];
+  $repayment_period = $repayment_array[2];
 
   $suffix = $repayment_period > 1 ? 's' : '';
 
