@@ -32,7 +32,7 @@
 	<h3 class="col-lg-offset-4 text text-danger">Verify <?php echo $l_fullname."'s"; ?> Loan Details</h3>
 
 	<!-- loan.fill.in.form -->
-		<form method="POST" action="<?php echo base_url(); ?>" class="well col-md-10 col-md-offset-1">
+		<div class="well col-md-10 col-md-offset-1">
 
 			<h4 class="text text-warning">Loanee Details</h4>
 			<hr class="hrDividerBetween">
@@ -75,11 +75,18 @@
 			<hr class="hrDividerDotted">
 			
 			<br><br>
-			<input type="submit" class="btn btn-danger" value="Cancel" name="cancel_loan_btn"/>
-			<input type="submit" class="btn btn-success" value="Verify Loan" name="verify_loan_id"/>
+
+			<form class="" method="POST" action="<?php echo base_url(); ?>auth/verify_loan">
+				<input type="submit" class="btn btn-success btn-lg btn-block" value="Verify Loan" name="verify_loan_btn"/>
+			</form>
+
+		</br>
+			<form class="" method="POST" action="<?php echo base_url(); ?>auth/verify_loan">
+				<input type="submit" class="btn btn-danger btn-lg btn-block" value="Cancel Loan" name="cancel_loan_btn"/>
+			</form>
+
 		</div>
-		<hr class="hrDividerBetween">
 		
-	</form><!-- end.loan.fill.in.form -->
+	</div><!-- end.loan.fill.in.form -->
 
 </div>

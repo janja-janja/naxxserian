@@ -381,6 +381,18 @@ Authorised members function helpers only
 		
 	}/*end loans()*/
 
+	public function verify_loan()
+	/*
+	Allow guarantor to verify a loan
+	*/
+	{
+		$cancel_loan_btn = $this->input->post("cancel_loan_btn");
+		$verify_loan_btn = $this->input->post("verify_loan_btn");
+
+		echo $cancel_loan_btn;
+		echo $verify_loan_btn;
+	}/*end verify_loan()*/
+
 	public function validate_loan()
 	/*
 	Validate member(s) loan fill ups
