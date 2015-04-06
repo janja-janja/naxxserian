@@ -1,9 +1,9 @@
 
 <!-- Members intial point in the system. Their profile -->
 <div class="container offset-top">
-	<h3><i class="fa fa-edit"></i>Edit Profile</h3>
+	<h3 class="col-lg-offset-5"><i class="fa fa-edit"></i>Edit Profile</h3>
 
-	<div class="well col-lg-10">
+	<div class="well col-md-10 col-md-offset-1">
 		<!-- Photo details -->
 		<?php 
 			
