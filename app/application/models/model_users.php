@@ -351,14 +351,70 @@
  			$this->db->select("loanee_id_number, amount, repayment_period");
  			$this->db->where($data);
 
- 			return $this->db->get("loans");
+ 			$query = $this->db->get("loans");
+ 			if($query->num_rows == 1)
+ 			{
+ 				/*loan waiting guarantor verification found*/
+ 				return $query;
+ 			}
+ 			elseif($query->num_rows == 0)
+ 			{
+ 				/*loan already verified by guarantor*/
+ 				$data = array(
+	 					"guarantor_id_number" => $id_number,
+	 					"loan_status" => 0,
+	 					"loan_verification" => 1
+	 				);
+
+	 			$this->db->select("loanee_id_number, amount, repayment_period");
+	 			$this->db->where($data);
+	 			
+	 			$query = $this->db->get("loans");
+	 			if($query->num_rows() == 1)
+	 			{
+	 				/*if guarantor has verified a loan and loanee han not completed payment*/
+	 				return $query;
+	 			}
+
+ 			}
+ 			
  		}
  		
  	}/*end get_loan_details()*/
 
 
 
+ 	public function verify_loan_details($loanee_id)
+ 	/*
+	Allow guarantor to verify loan details for loanee
+	$return boolean
+ 	*/
+ 	{
+ 		$guarantor_id = $this->session->all_userdata()["id_number"];
 
+ 		$update_data = array(
+ 				"loan_verification" => 1
+ 			);
+
+ 		$where_data = array(
+ 				"loanee_id_number" => $loanee_id,
+ 				"guarantor_id_number" => $guarantor_id,
+ 				"loan_verification" => 0,
+ 				"loan_status" => 0
+ 			);
+
+ 		$this->db->where($where_data);
+
+ 		if($this->db->update("loans", $update_data))
+ 		{
+ 			return true;
+ 		}
+ 		else
+ 		{
+ 			return false;
+ 		}
+
+ 	}
 
 
 

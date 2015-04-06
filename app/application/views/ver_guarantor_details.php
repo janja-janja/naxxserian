@@ -32,16 +32,26 @@
 	<h3 class="col-lg-offset-4 text text-danger">Verify <?php echo $l_fullname."'s"; ?> Loan Details</h3>
 
 	<!-- loan.fill.in.form -->
-		<div class="well col-md-10 col-md-offset-1">
+		<form method="POST" action="<?php echo base_url(); ?>auth/verify_loan" class="well col-md-10 col-md-offset-1">
+
+			<?php 
+				if($this->uri->segment(2) == "verify_loan")
+				{
+					echo $loan_verification_feedback;
+				}
+
+			 ?>
 
 			<h4 class="text text-warning">Loanee Details</h4>
 			<hr class="hrDividerBetween">
 			<label for="loaneeName">Name</label>
 			<input type="text" class="col-lg-12 form-control" disabled value="<?php echo $l_fullname; ?>"/>
+			<input type="hidden" class="col-lg-12 form-control" value="<?php echo $l_fullname; ?>" name="loanee_fullname"/>
 			<br><br><br><br>
 			
 			<label for="loaneeID">ID Number</label>
 			<input type="text" class="col-lg-12 form-control" disabled value="<?php echo $loanee_id; ?>"/>
+			<input type="hidden" class="col-lg-12 form-control" value="<?php echo $loanee_id; ?>" name="loanee_id_number"/>
 
 			<br><br><br><br>
 			<label for="loaneeID">Phone Number</label>
@@ -75,18 +85,11 @@
 			<hr class="hrDividerDotted">
 			
 			<br><br>
-
-			<form class="" method="POST" action="<?php echo base_url(); ?>auth/verify_loan">
-				<input type="submit" class="btn btn-success btn-lg btn-block" value="Verify Loan" name="verify_loan_btn"/>
-			</form>
-
-		</br>
-			<form class="" method="POST" action="<?php echo base_url(); ?>auth/verify_loan">
-				<input type="submit" class="btn btn-danger btn-lg btn-block" value="Cancel Loan" name="cancel_loan_btn"/>
-			</form>
-
+			<input type="submit" class="btn btn-danger" value="Cancel Loan" name="verify_loan_btn"/>
+			<input type="submit" class="btn btn-success" value="Verify Loan" name="verify_loan_btn"/>
 		</div>
+		<hr class="hrDividerBetween">
 		
-	</div><!-- end.loan.fill.in.form -->
+	</form><!-- end.loan.fill.in.form -->
 
 </div>

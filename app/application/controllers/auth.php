@@ -367,7 +367,18 @@ Authorised members function helpers only
 						"auth" => "ver_guarantor_details",
 						"title" => "Naxxserian &middot; Verify Loan"
 					);
+				
 				$this->_load_view($data);
+			}
+			elseif($guarantor_status == 1)
+			{
+				$data = array(
+						"auth" => "verified_loan_details",
+						"title" => "Naxxserian &middot; Guarantor Blocked"
+					);
+
+				$this->_load_view($data);
+
 			}
 /*
 			$data = array(
@@ -386,11 +397,49 @@ Authorised members function helpers only
 	Allow guarantor to verify a loan
 	*/
 	{
-		$cancel_loan_btn = $this->input->post("cancel_loan_btn");
 		$verify_loan_btn = $this->input->post("verify_loan_btn");
+		$loan_status_btn = ["Verify Loan", "Cancel Loan"];
 
-		echo $cancel_loan_btn;
-		echo $verify_loan_btn;
+
+
+		$loanee_id = $this->input->post("loanee_id_number");
+		$l_fullname = $this->input->post("loanee_fullname")."'s";
+
+		if($verify_loan_btn == $loan_status_btn[0])
+		{
+			/*guarantor agrees to verify loan*/
+			$update_loan_details = $this->model_users->verify_loan_details($loanee_id);
+
+			if($update_loan_details)
+			{
+				$success = "<h4 class='alert alert-success'>You have successfuly verified ".$l_fullname." loan details</h4>";
+
+				$data = array(
+						"auth" => "verified_loan_details",
+						"title" => "Verified Loan Details",
+						"loan_verification_feedback" => $success
+					);
+
+				$this->_load_view($data);
+			}
+			else
+			{
+				$success = "<h4 class='alert alert-danger'>There was an error verifying $l_fullname loan details</h4>";
+
+				$data = array(
+						"auth" => "ver_guarantor_details",
+						"title" => "Falied Verification",
+						"loan_verification_feedback" => $success
+					);
+
+				$this->_load_view($data);
+			}
+
+		}
+		elseif($verify_loan_btn == $loan_status_btn[1])
+		{
+			/*guarantor denied to verify loanee*/
+		}
 	}/*end verify_loan()*/
 
 	public function validate_loan()
