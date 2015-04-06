@@ -9,7 +9,7 @@
   $g_fullname = ucfirst($g_firstname).' '.ucfirst($g_middlename).' '.ucfirst($g_surname);
 
   /*loanee_details*/
-  $loan_object = $this->model_users->get_loan_details("guarantor");
+  $loan_object = $this->loans_model->get_loan_details("guarantor");
 
   foreach($loan_object->result() as $key)
   {

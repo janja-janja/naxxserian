@@ -11,7 +11,7 @@
   $l_fullname = ucfirst($l_firstname).' '.ucfirst($l_middlename).' '.ucfirst($l_surname);
 
   /*guarantor details*/
-  $loan_object = $this->model_users->get_loan_details("loanee");
+  $loan_object = $this->loans_model->get_loan_details("loanee");
 
   foreach($loan_object->result() as $key)
   {
@@ -28,7 +28,7 @@
   $g_fullname = ucfirst($g_firstname).' '.ucfirst($g_middlename).' '.ucfirst($g_surname);
 
   /*repayment period*/
-  $repayment_array = $this->model_users->get_repayment_period($amount, $application_date);
+  $repayment_array = $this->loans_model->get_repayment_period($amount, $application_date);
 
   $amount_payable = $repayment_array[0];
   $rate = $repayment_array[1];

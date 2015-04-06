@@ -13,6 +13,8 @@ Authorised members function helpers only
 
 		#load models on startup
 		$this->load->model('model_users');
+		$this->load->model('loans_model');
+
 		$data = array(
 				"title" => "Naxxserian Investment Enterprise"
 			);
@@ -333,7 +335,7 @@ Authorised members function helpers only
 	*/
 	{
 		/*check member loan status*/
-		$loanee_status = $this->model_users->check_loan_status("loanee");
+		$loanee_status = $this->loans_model->check_loan_status("loanee");
 
 		if($loanee_status == 0)
 		{
@@ -359,7 +361,7 @@ Authorised members function helpers only
 		{
 			/*member is not a loanee*/
 			/*check if member is a guarantor*/
-			$guarantor_status = $this->model_users->check_loan_status("guarantor");
+			$guarantor_status = $this->loans_model->check_loan_status("guarantor");
 			if($guarantor_status == 0)
 			{
 				/*allow guarantor to verify the requested loan*/
@@ -367,7 +369,7 @@ Authorised members function helpers only
 						"auth" => "ver_guarantor_details",
 						"title" => "Naxxserian &middot; Verify Loan"
 					);
-				
+
 				$this->_load_view($data);
 			}
 			elseif($guarantor_status == 1)
@@ -408,7 +410,7 @@ Authorised members function helpers only
 		if($verify_loan_btn == $loan_status_btn[0])
 		{
 			/*guarantor agrees to verify loan*/
-			$update_loan_details = $this->model_users->verify_loan_details($loanee_id);
+			$update_loan_details = $this->loans_model->verify_loan_details($loanee_id);
 
 			if($update_loan_details)
 			{
@@ -480,7 +482,7 @@ Authorised members function helpers only
 		{
 
 			/*insert loan_details to DB*/
-			$saved_to_db = $this->model_users->save_loan_details($guarantor, $amount, $repayment_period);
+			$saved_to_db = $this->loans_model->save_loan_details($guarantor, $amount, $repayment_period);
 
 			if($saved_to_db)
 			{/*saved to DB*/

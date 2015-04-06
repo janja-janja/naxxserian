@@ -1,7 +1,7 @@
 <?php 
  
  /*guarantor details*/ 
-  $guarantor_id = $this->model_users->get_guarantor_id();
+  $guarantor_id = $this->loans_model->get_guarantor_id();
 
   $g_firstname = $this->model_users->get_details('first_name', $guarantor_id);
   $g_middlename = $this->model_users->get_details('middle_name', $guarantor_id);
@@ -11,7 +11,7 @@
   $g_fullname = ucfirst($g_firstname).' '.ucfirst($g_middlename).' '.ucfirst($g_surname);
 
   /*loan details*/
-  $loan_object = $this->model_users->get_loan_details("loanee");
+  $loan_object = $this->loans_model->get_loan_details("loanee");
   foreach($loan_object->result() as $key)
   {
     $loan_amount = $key->amount;
@@ -20,7 +20,7 @@
 
 
   /*repayment period*/
-  $repayment_array = $this->model_users->get_repayment_period($loan_amount, $application_date);
+  $repayment_array = $this->loans_model->get_repayment_period($loan_amount, $application_date);
 
   $amount_payable = $repayment_array[0];
   $rate = $repayment_array[1];
