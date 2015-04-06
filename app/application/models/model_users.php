@@ -201,7 +201,7 @@
 
 
 
- 	public function check_loanee_status()
+ 	public function check_loan_status($whose_detail)
  	/*
 	check member(s) loan status
 	@return int
@@ -209,46 +209,89 @@
  	{
  		$id_number = $this->session->all_userdata()["id_number"];
 
- 		$loan_data = array(
+ 		if($whose_detail == "loanee")
+ 		{/*loanee logged in*/
+ 			$loan_data = array(
  				"loanee_id_number" => $id_number,
  				"loan_verification" => 0,
  				"loan_status" => 0
  			);
 
- 		$this->db->where($loan_data);
+	 		$this->db->where($loan_data);
 
- 		$query = $this->db->get("loans");
+	 		$query = $this->db->get("loans");
 
- 		if($query->num_rows() == 1)
- 		{
- 			/*loanee not verified by guarantor. Deny loan fill in form*/
- 			return 0;
+	 		if($query->num_rows() == 1)
+	 		{
+	 			/*loanee not verified by guarantor. Deny loan fill in form*/
+	 			return 0;
+	 		}
+	 		elseif($query->num_rows() == 0)
+	 		{
+	 			/*check if loanee has been verified by guarantor.*/
+	 			$loan_data = array(
+	 				"loanee_id_number" => $id_number,
+	 				"loan_verification" => 1,
+	 				"loan_status" => 0
+	 			);
+
+	 			$this->db->where($loan_data);
+
+	 			$query = $this->db->get("loans");
+
+	 			if($query->num_rows() == 1)
+	 			{
+	 				/*loanee has been verified by guarantor. Deny loan fill in form.*/
+	 				return 1;
+	 			}
+	 			elseif($query->num_rows() == 0)
+	 			{
+	 				/*member is not a loanee. Allow loan fill in form.*/
+	 				return 2;
+	 			}
+
+	 		}
  		}
- 		elseif($query->num_rows() == 0)
- 		{
- 			/*check if loanee has been verified by guarantor.*/
- 			$loan_data = array(
- 				"loanee_id_number" => $id_number,
- 				"loan_verification" => 1,
- 				"loan_status" => 0
- 			);
+ 		elseif($whose_detail == "guarantor")
+ 		{/*guarantor logged in*/
+ 			/*allow guarantor to verify loanee's loan*/
+ 			$data = array(
+ 					"guarantor_id_number" => $id_number,
+ 					"loan_verification" => 0
+ 				);
 
- 			$this->db->where($loan_data);
-
+ 			$this->db->where($data);
  			$query = $this->db->get("loans");
-
  			if($query->num_rows() == 1)
  			{
- 				/*loanee has been verified by guarantor. Deny loan fill in form.*/
- 				return 1;
+ 				/*unverified loan found. Deny loan fill in form*/
+ 				return 0;
  			}
  			elseif($query->num_rows() == 0)
  			{
- 				/*member is not a loanee. Allow loan fill in form.*/
- 				return 2;
- 			}
+ 				/*no unverified loan. 
+ 				Check if guarantor already verified. Deny loan fill in form*/
+ 				$data = array(
+ 						"guarantor_id_number" => $id_number,
+ 						"loan_verification" => 1,
+ 						"loan_status" => 0
+ 					);
 
+ 				$this->db->where($data);
+ 				$query = $this->db->get("loans");
+ 				if($query->num_rows() == 1)
+ 				{
+ 					/*Is already a guarantor. Deny loan fill in form*/
+ 					return 1;
+ 				}
+ 				elseif($query->num_rows() == 0)
+ 				{
+ 					/*Member is not a guarantor. Allow log in form*/
+ 					return 2;
+ 				}
+ 			}
  		}
+ 		
  	}/*end check_loanee_status()*/
 
  	public function get_guarantor_id()
@@ -275,17 +318,18 @@
  	
  	public function get_loan_details($whose_detail)
  	/*
-	get loan amount, repayment period
+	get loan amount, application_date
 	@param string(loanee/guarantor)
 	@return object
  	*/
  	{
+ 		$id_number = $this->session->all_userdata()["id_number"];
+
  		if($whose_detail == "loanee")
  		{/*get loanee details*/
- 			$loanee_id = $this->session->all_userdata()["id_number"];
 
 	 		$data = array(
-	 				"loanee_id_number" => $loanee_id,
+	 				"loanee_id_number" => $id_number,
 	 				"loan_status" => 0,
 	 				"loan_verification" => 0
 	 			);
@@ -295,6 +339,19 @@
 
 	 		return $this->db->get("loans");
 
+ 		}
+ 		elseif($whose_detail == "guarantor")
+ 		{/*get guarantor details*/
+ 			$data = array(
+ 					"guarantor_id_number" => $id_number,
+ 					"loan_status" => 0,
+ 					"loan_verification" => 0
+ 				);
+
+ 			$this->db->select("loanee_id_number, amount, repayment_period");
+ 			$this->db->where($data);
+
+ 			return $this->db->get("loans");
  		}
  		
  	}/*end get_loan_details()*/

@@ -333,7 +333,7 @@ Authorised members function helpers only
 	*/
 	{
 		/*check member loan status*/
-		$loanee_status = $this->model_users->check_loanee_status();
+		$loanee_status = $this->model_users->check_loan_status("loanee");
 
 		if($loanee_status == 0)
 		{
@@ -350,7 +350,7 @@ Authorised members function helpers only
 			/*loanee verified by guarantor(Has not fully paid his loan)*/
 			$data = array(
 					"auth" => "ver_loanee_details",
-					"title" => "Loanee Details"
+					"title" => "Naxxserian &middot; Loan Details"
 				);
 
 			$this->_load_view($data);
@@ -358,12 +358,24 @@ Authorised members function helpers only
 		elseif($loanee_status == 2)
 		{
 			/*member is not a loanee*/
+			/*check if member is a guarantor*/
+			$guarantor_status = $this->model_users->check_loan_status("guarantor");
+			if($guarantor_status == 0)
+			{
+				/*allow guarantor to verify the requested loan*/
+				$data = array(
+						"auth" => "ver_guarantor_details",
+						"title" => "Naxxserian &middot; Verify Loan"
+					);
+				$this->_load_view($data);
+			}
+/*
 			$data = array(
 					"auth" => "request_loan",
 					"title" => "Request Loan"
 				);
 
-			$this->_load_view($data);
+			$this->_load_view($data);*/
 		}
 		
 		
