@@ -11,10 +11,6 @@ Public |Non-Authorised members function helpers only
 	function __construct()
 	{
 		parent::__construct();
-
-		#load views and models on startup
-		#$this->load->view('inc/template');
-		$this->load->model('model_users');
 		
 		$data = array(
 				"title" => "Naxxserian Investment Enterprise"
