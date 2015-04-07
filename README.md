@@ -1,6 +1,12 @@
 # Naxxserian Investment Enterprise
 * A chama management web app for Naxxserian Investment Enterprise Group
 
+[![Build
+Status](https://drone.io/github.com/denisKaranja/naxxserian/status.png)](https://drone.io/github.com/denisKaranja/naxxserian/latest)
+[![Coverage
+Status](https://coveralls.io/repos/denisKaranja/naxxserian/badge.png)](https://coveralls.io/r/denisKaranja/naxxserian)
+[![Code Health](https://landscape.io/github/denisKaranja/naxxserian/master/landscape.svg)](https://landscape.io/github/denisKaranja/naxxserian/master)
+
 #Users activities & roles
 * Public
   * View Completed and Ongoing projects
