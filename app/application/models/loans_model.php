@@ -369,6 +369,25 @@ Hold helpers associated with loans
 	  }
  	}
 
+ 	public function get_available_guarantors()
+ 	/*
+	Return a list of all available members that qualify for guarantorship
+	@return object
+ 	*/
+ 	{
+ 		$query = "SELECT * FROM `members`, `loans` where members.id_number != loans.loanee_id_number and   members.id_number != loans.guarantor_id_number";
+
+ 		$query = $this->db->query($query);
+
+ 		if($query->num_rows() > 0)
+ 		{
+ 			return $query->num_rows();
+ 		}
+ 		else
+ 		{
+ 			return 0;
+ 		}
+ 	}
 
  	private function date_difference ($old_date) 
  	{

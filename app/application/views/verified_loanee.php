@@ -34,6 +34,8 @@
 ?>
 
 <div class="container offset-top">
+
+  <?php  ?>
 	<h3 class="col-lg-offset-4 text text-success">Verified Loan Details</h3>
 
 	<!-- loan.fill.in.form -->

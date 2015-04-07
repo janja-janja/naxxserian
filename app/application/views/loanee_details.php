@@ -141,7 +141,7 @@
       <hr class="hrDividerDotted">
       <br>
 
-      <label for="repayment_period">Repayment Period</label>
+      <label for="repayment_period">Repayment Period<h5 class="text text-success">System calculated value with respect to application date.</h5></label>
       <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $repayment_period .' Month'.$suffix;?>" />
       <br>
 

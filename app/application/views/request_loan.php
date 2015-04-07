@@ -10,6 +10,8 @@
 
 
 		$fullname = ucfirst($firstname).' '.ucfirst($middlename).' '.ucfirst($surname);
+
+		$guarantors = $this->loans_model->get_available_guarantors();
 	}
 	
 ?>
@@ -44,15 +46,20 @@
 			<br><br>
 			<h4 class="text text-warning">Guarantor Details</h4>
 			<hr class="hrDividerBetween">
-			
+				
+			<?php 
+					if(is_object($guarantors))
+						{/*guarantors found*/
+			 ?>
+
 			<label for="guarantorDetails">Pick your guarantor</label>
 			<select id='guarantorDetails' class="col-lg-12 form-control" name="guarantorDetails">
 				<option value="">Choose your guarantor...</option>
 				<?php
-						$members = $this->model_users->get_all_members();
+						
 						$logged_in_member = $this->session->all_userdata()["id_number"];
-
-						foreach($members->result() as $key)
+						/*guarantors found*/
+						foreach($guarantors->result() as $key)
 						{
 							if($logged_in_member != $key->id_number)
 							{
@@ -65,11 +72,18 @@
 
 								echo("<option value='".$member_id_number."'>".$member_fullname."</option>");
 							}
-							
 						}
+					}
+					else
+					{/*no guarantor found*/
+					
 				?>
 			</select>
-
+			<h4 class="alert alert-danger">No available guarantor at the moment! Check later.</h4>
+			<?php  
+				die();
+				}
+			?>
 			<input type="text" id="guarantorNameHolder" class="col-lg-12 form-control" style="display:none;"/>
 			<hr class="hrDividerDotted">
 			</br></br>
