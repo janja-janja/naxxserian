@@ -108,6 +108,12 @@
         <?php } ?>
 
 			<br>
+
+      <?php 
+          /*Dont display loanee details for the loanee*/
+          if(!isset($verified_loanee_header))
+          {
+       ?>
       <h4 class="text text-warning">Loanee Details</h4>
       <hr class="hrDividerBetween">
       <label for="loaneeName">Name</label>
@@ -123,9 +129,9 @@
       <label for="loaneeID">Phone Number</label>
       <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $l_phone_number; ?>"/>
       
-      
-      <hr class="hrDividerDotted">
+       <hr class="hrDividerDotted">
       <br><br>
+      <?php } ?>
 
       <h4 class="text text-warning">Loan Details</h4>
       <hr class="hrDividerBetween">
@@ -151,6 +157,13 @@
        <hr class="hrDividerDotted">
        <br>
 
+
+       <?php 
+        /*dont display guarantor details for the guarantor.*/
+        if(!isset($verified_guarantor_header))
+        {
+
+        ?>
 			<h4 class="text text-warning">Guarantor Details</h4>
 			<hr class="hrDividerBetween">
 			
@@ -161,6 +174,7 @@
       <label for="guarantorPhoneNumber">Phone Number</label>
       <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $g_phone_number; ?>" />
 		
+    <?php } ?>
        <br>
 		
 			
