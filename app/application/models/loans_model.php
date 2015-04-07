@@ -214,7 +214,7 @@ Hold helpers associated with loans
  				"loan_verification" => 0
  			);
 
- 		$this->db->select("amount, application_date");
+ 		$this->db->select("loanee_id_number, amount, application_date");
  		$this->db->where($data);
 
  		$query = $this->db->get("loans");
@@ -232,7 +232,7 @@ Hold helpers associated with loans
  				"loan_verification" => 1
  			);
 
-	 		$this->db->select("amount, guarantor_id_number, application_date, balance");
+	 		$this->db->select("loanee_id_number, amount, guarantor_id_number, application_date, balance");
 	 		$this->db->where($data);
 
 	 		$query = $this->db->get("loans");

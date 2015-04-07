@@ -46,7 +46,6 @@
     $repayment_period = $repayment_array[2];
 
     $suffix = $repayment_period > 1 ? 's' : '';
-
   }/*end of guarantor view*/
 
   elseif(is_object($loan_object))
@@ -56,7 +55,15 @@
       $loan_amount = $key->amount;
       $application_date = $key->application_date;
       $balance = $key->balance;
+      $loanee_id = $key->loanee_id_number;
     }
+
+    $l_firstname = $this->model_users->get_details('first_name', $loanee_id);
+    $l_middlename = $this->model_users->get_details('middle_name', $loanee_id);
+    $l_surname = $this->model_users->get_details('surname', $loanee_id);
+    $l_phone_number = $this->model_users->get_details('phone_number', $loanee_id);
+
+    $l_fullname = ucfirst($l_firstname).' '.ucfirst($l_middlename).' '.ucfirst($l_surname);
 
     /*repayment period*/
     $repayment_array = $this->loans_model->get_repayment_period($loan_amount, $application_date);
@@ -101,6 +108,48 @@
         <?php } ?>
 
 			<br>
+      <h4 class="text text-warning">Loanee Details</h4>
+      <hr class="hrDividerBetween">
+      <label for="loaneeName">Name</label>
+      <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $l_fullname; ?>"/>
+      <input type="hidden" class="col-lg-12 form-control" value="<?php echo $l_fullname; ?>" name="loanee_fullname"/>
+      <br><br><br><br>
+      
+      <label for="loaneeID">ID Number</label>
+      <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $loanee_id; ?>"/>
+      <input type="hidden" class="col-lg-12 form-control" value="<?php echo $loanee_id; ?>" name="loanee_id_number"/>
+
+      <br><br><br><br>
+      <label for="loaneeID">Phone Number</label>
+      <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $l_phone_number; ?>"/>
+      
+      
+      <hr class="hrDividerDotted">
+      <br><br>
+
+      <h4 class="text text-warning">Loan Details</h4>
+      <hr class="hrDividerBetween">
+      
+      <label for="loanAmount">Amount Borrowed</label>
+      <input type="text" class="col-lg-12 form-control" value="<?php echo $loan_amount; ?>" disabled/>
+      <hr class="hrDividerDotted">
+      <br>
+
+      <label for="repayment_period">Repayment Period</label>
+      <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $repayment_period .' Month'.$suffix;?>" />
+      <br>
+
+       <br><br><br>
+
+       <label for="amountPayable">Amount Payable<h5 class="text text-success">System calculated value with respect to application date.</h5></label>
+       <input type="text" class="col-lg-12 form-control" value="<?php echo $amount_payable .'  i.e '.$rate.'%'; ?> Interest of <?php echo $loan_amount; ?>" disabled/>
+
+       <br><br><br><br>
+
+       <label for="balanceDue">Balance Due</label>
+       <input type="text" class="col-lg-12 form-control" value="<?php echo $balance; ?>" disabled/>
+       <hr class="hrDividerDotted">
+       <br>
 
 			<h4 class="text text-warning">Guarantor Details</h4>
 			<hr class="hrDividerBetween">
@@ -111,30 +160,7 @@
 
       <label for="guarantorPhoneNumber">Phone Number</label>
       <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $g_phone_number; ?>" />
-			</br></br><br><br>
-
-			<h4 class="text text-warning">Loan Details</h4>
-			<hr class="hrDividerBetween">
-			
-      <label for="loanAmount">Amount Borrowed</label>
-      <input type="text" class="col-lg-12 form-control" value="<?php echo $loan_amount; ?>" disabled/>
-      <hr class="hrDividerDotted">
-      <br>
-
-			<label for="repayment_period">Repayment Period</label>
-      <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $repayment_period .' Month'.$suffix;?>" />
-      <br>
-
-       <br><br><br><br>
-
-       <label for="amountPayable">Amount Payable<h5 class="text text-success">System calculated value with respect to application date.</h5></label>
-       <input type="text" class="col-lg-12 form-control" value="<?php echo $amount_payable .'  i.e '.$rate.'%'; ?> Interest of <?php echo $loan_amount; ?>" disabled/>
-
-       <br><br><br><br>
-
-       <label for="balanceDue">Balance Due</label>
-       <input type="text" class="col-lg-12 form-control" value="<?php echo $balance; ?>" disabled/>
-       <hr class="hrDividerDotted">
+		
        <br>
 		
 			
