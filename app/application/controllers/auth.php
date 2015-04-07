@@ -342,7 +342,8 @@ Authorised members function helpers only
 			/*loanee not verified by guarantor(Has already applied)*/
 			$data = array(
 					"auth" => "loanee_details",
-					"title" => "Loanee Details"
+					"title" => "Loanee Details",
+					"unverified_loanee_header" => "not_set"
 				);
 
 			$this->_load_view($data);
@@ -352,8 +353,9 @@ Authorised members function helpers only
 		{
 			/*loanee verified by guarantor(Has not fully paid his loan)*/
 			$data = array(
-					"auth" => "verified_loanee",
-					"title" => "Naxxserian &middot; Loan Details"
+					"auth" => "loanee_details",
+					"title" => "Naxxserian &middot; Loan Details",
+					"verified_loanee_header" => "set"
 				);
 
 			$this->_load_view($data);
@@ -377,9 +379,11 @@ Authorised members function helpers only
 			}
 			elseif($guarantor_status == 1)
 			{
+				/*guarantor has verified the loan request*/
 				$data = array(
-						"auth" => "verified_loan_details",
-						"title" => "Naxxserian &middot; Guarantor Blocked"
+						"auth" => "loanee_details",
+						"title" => "Naxxserian &middot; Guarantor Blocked",
+						"verified_guarantor_header" => "set"
 					);
 
 				$this->_load_view($data);
