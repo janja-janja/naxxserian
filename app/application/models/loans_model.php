@@ -381,7 +381,7 @@ Hold helpers associated with loans
 
  		if($query->num_rows() > 0)
  		{
- 			return $query->num_rows();
+ 			return $query;
  		}
  		else
  		{
