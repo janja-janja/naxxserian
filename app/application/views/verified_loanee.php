@@ -38,7 +38,9 @@
 
 	<!-- loan.fill.in.form -->
 		<form method="POST" class="well col-md-10 col-md-offset-1">
-      <h4 class="text text-success"><strong><?php echo ($g_fullname); ?> confirmed your loan request as your guarantor.</strong></h4>
+      <h4 class="text text-success bold"><?php echo ($g_fullname); ?> confirmed your loan request as your guarantor.</h4>
+      <h5 class="text text-danger bold">Current balance: <?php echo $balance; ?> Kshs.</h5>
+      <hr class="hrDividerBetween">
 
 			<h4 class="text text-warning">Guarantor Details</h4>
 			<hr class="hrDividerBetween">
@@ -63,7 +65,7 @@
       <input type="text" class="col-lg-12 form-control" disabled value="<?php echo $repayment_period .' Month'.$suffix;?>" />
       <br><br><br><br>
 
-       <label for="amountPayable">Amount Payable</label>
+       <label for="amountPayable">Amount Payable<h5 class="text text-success">System calculated value with respect to application date.</h5></label>
        <input type="text" class="col-lg-12 form-control" value="<?php echo $amount_payable .'  i.e '.$rate.'%'; ?> Interest of <?php echo $loan_amount; ?>" disabled/>
 
        <br><br><br><br>

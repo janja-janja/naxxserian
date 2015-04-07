@@ -346,6 +346,7 @@ Authorised members function helpers only
 				);
 
 			$this->_load_view($data);
+			return false;
 		}
 		elseif($loanee_status == 1)
 		{
@@ -356,6 +357,7 @@ Authorised members function helpers only
 				);
 
 			$this->_load_view($data);
+			return false;
 		}
 		elseif($loanee_status == 2)
 		{
@@ -371,6 +373,7 @@ Authorised members function helpers only
 					);
 
 				$this->_load_view($data);
+				return false;
 			}
 			elseif($guarantor_status == 1)
 			{
@@ -380,10 +383,11 @@ Authorised members function helpers only
 					);
 
 				$this->_load_view($data);
+				return false;
 
 			}
-/*
-			$data = array(
+
+			/*$data = array(
 					"auth" => "request_loan",
 					"title" => "Request Loan"
 				);
@@ -391,7 +395,13 @@ Authorised members function helpers only
 			$this->_load_view($data);*/
 		}
 		
-		
+			/*new loan applicant*/
+		$data = array(
+				"auth" => "request_loan",
+				"title" => "Request Loan"
+			);
+
+		$this->_load_view($data);
 	}/*end loans()*/
 
 	public function verify_loan()
