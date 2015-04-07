@@ -14,11 +14,14 @@ Hold helpers associated with loans
  		$loanee_id = $this->session->all_userdata()["id_number"];
  		$date = date("Y-m-d H:i:s");
 
+ 		$balance_array = $this->get_repayment_period($loan_amount, $date);
+ 		$balance = $balance_array[0];
+
  		$data = array(
  				"loanee_id_number" => $loanee_id,
  				"guarantor_id_number" => $guanrator_id,
  				"amount" => $loan_amount,
- 				"balance" => $loan_amount,
+ 				"balance" => $balance,
  				"application_date" => $date,
  				"repayment_period" => $repayment_period
 
@@ -210,7 +213,7 @@ Hold helpers associated with loans
 	 				"loan_verification" => 1
 	 			);
 
-		 		$this->db->select("amount, guarantor_id_number, application_date");
+		 		$this->db->select("amount, guarantor_id_number, application_date, balance");
 		 		$this->db->where($data);
 
 		 		$query = $this->db->get("loans");

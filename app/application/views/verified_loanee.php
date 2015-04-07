@@ -16,6 +16,7 @@
   {
     $loan_amount = $key->amount;
     $application_date = $key->application_date;
+    $balance = $key->balance;
   }
 
 
@@ -68,7 +69,7 @@
        <br><br><br><br>
 
        <label for="balanceDue">Balance Due</label>
-       <input type="text" class="col-lg-12 form-control" value="<?php echo $amount_payable .'  i.e '.$rate.'%'; ?>" disabled/>
+       <input type="text" class="col-lg-12 form-control" value="<?php echo $balance; ?>" disabled/>
        <hr class="hrDividerDotted">
        <br>
 		
