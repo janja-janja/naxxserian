@@ -351,7 +351,7 @@ Authorised members function helpers only
 		{
 			/*loanee verified by guarantor(Has not fully paid his loan)*/
 			$data = array(
-					"auth" => "ver_loanee_details",
+					"auth" => "verified_loanee",
 					"title" => "Naxxserian &middot; Loan Details"
 				);
 

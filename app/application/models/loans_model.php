@@ -145,7 +145,32 @@ Hold helpers associated with loans
  		$this->db->where($loan_data);
  		$query = $this->db->get("loans");
 
- 		return $this->array_to_single($query, "guarantor_id_number");
+ 		if($query->num_rows() == 0)
+ 		{
+ 			/*check if guarantor has verified loanee details*/
+ 			$loan_data = array(
+ 				"loanee_id_number" => $loanee_id,
+ 				"loan_verification" => 1,
+ 				"loan_status" => 0
+ 			);
+
+	 		$this->db->select("guarantor_id_number");
+	 		$this->db->where($loan_data);
+	 		$query = $this->db->get("loans");
+
+	 		if($query->num_rows() == 1)
+	 		{
+	 			/*guarantor has verified details*/
+	 			return $this->array_to_single($query, "guarantor_id_number");
+	 		}
+
+ 		}
+ 		elseif($query->num_rows() == 1)
+ 		{
+ 			/*guarantor has not verified loanee*/
+ 			return $this->array_to_single($query, "guarantor_id_number");
+ 		}
+
  	}
 
 
@@ -337,5 +362,20 @@ Hold helpers associated with loans
 
 		return ($hours * 60) + ($mins);
 	}
+
+	private function array_to_single($array, $column)
+	/*
+	Array to  single value
+	$params -> array(object array from db), string(column name)
+	$return single value(int/string)
+	*/
+	{
+		foreach($array->result() as $key)
+		{
+			$value = $key->$column;
+		}
+		return $value;
+	}
+	/*end array_to_single*/
 
 }/*end of Loans_model*/

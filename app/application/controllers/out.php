@@ -12,6 +12,7 @@ Public |Non-Authorised members function helpers only
 	{
 		parent::__construct();
 		
+		$this->load->model("model_users");
 		$data = array(
 				"title" => "Naxxserian Investment Enterprise"
 			);
