@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/*
+__ @author -> Denis Karanja
+__ 
+*/
 class Auth extends CI_Controller
 /*
 Authorised members function helpers only
