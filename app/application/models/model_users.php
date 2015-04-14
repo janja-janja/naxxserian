@@ -1,5 +1,8 @@
 <?php
-
+ /*
+__ @author -> Denis Karanja
+__ School of Computing and Informatics - UoN
+*/
  class Model_users extends CI_Model{
 
  	public function user_details($column, $unique_id)

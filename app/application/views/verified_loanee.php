@@ -1,5 +1,8 @@
 <?php 
- 
+  /*
+__ @author -> Denis Karanja
+__ School of Computing and Informatics - UoN
+*/
  /*guarantor details*/ 
   $guarantor_id = $this->loans_model->get_guarantor_id();
 
