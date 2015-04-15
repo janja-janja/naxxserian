@@ -1,4 +1,8 @@
 <?php 
+ /*
+__ @author -> Denis Karanja
+__ School of Computing and Informatics - UoN
+*/
 	/*guarantor details*/ 
 	$guarantor_id = $this->session->all_userdata()["id_number"];
   $g_firstname = $this->model_users->get_details('first_name', $guarantor_id);
