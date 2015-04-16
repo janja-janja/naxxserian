@@ -1,5 +1,8 @@
 <?php
-
+ /*
+__ @author -> Denis Karanja
+__ School of Computing and Informatics - UoN
+*/
 class Loans_model extends CI_Model
 /*
 Hold helpers associated with loans
