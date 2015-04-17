@@ -1,5 +1,8 @@
 <?php 
-		
+		 /*
+__ @author -> Denis Karanja
+__ School of Computing and Informatics - UoN
+*/
 	if($this->session->userdata("is_logged_in"))
 	{
 		$id_number = $this->session->all_userdata()["id_number"];
