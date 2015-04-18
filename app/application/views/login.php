@@ -1,29 +1,4 @@
 
-
-<!-- <div class="col-md well">
-	<?php
-/*		echo form_open('main/login_validation');
-
-		echo"<p>ID number: ";
-		echo form_input('id_number', $this->input->post('id_number'));
-		echo "</p>";
-
-		echo"<p>Password: ";
-		echo form_password('password');
-		echo "</p>";
-
-		echo"<p>";
-		echo form_submit('login_submit', 'Login');
-		echo "</p>";
-
-		echo form_close();
-
-*/
-	?>
-	
-</div> -->
-
-
 <!--***SIGN-IN-FORM***-->
 	 <div class="container offset-top">
 	      <form class="form-signin font-family" method="POST" action="<?php echo base_url();?>out/login_validation" id="login-form-auth">
