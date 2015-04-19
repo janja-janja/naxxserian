@@ -553,9 +553,9 @@ Authorised members function helpers only
 	{
 		$data = array(
 				"auth" => "all_members",
-				"title" => "Naxxserian &middot; members"
+				"title" => "Naxxserian &middot; Members"
 			);
-
+		
 		$this->_load_view($data);
 
 	}
