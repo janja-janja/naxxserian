@@ -13,8 +13,12 @@
 ?>
 
 <div class="container offset-top">
-	<h4>All Members</h4>
-
+	<div>
+		<h4 class="btn btn-success">All Members</h4>
+		<h4 class="btn btn-danger">Loanees & Guarantors</h4>
+		<h4 class="btn btn-info">Signatories</h4>
+	</div>
+	<hr class="hrDividerBetween">
 	<table class="table table-responsive table-hover table-stripped well">
 		<thead>
 			<td class="bold">Name</td>
