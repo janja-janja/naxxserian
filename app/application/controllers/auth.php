@@ -542,5 +542,19 @@ Authorised members function helpers only
 
 
 
+	public function all_members()
+	/*
+	Display all members of the chama
+	*/
+	{
+		$data = array(
+				"auth" => "all_members",
+				"title" => "Naxxserian &middot; Members"
+			);
+
+		$this->_load_view($data);
+		
+	}
+
 
 }/*end of class Auth*/
