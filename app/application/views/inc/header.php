@@ -58,7 +58,7 @@
 
             <li><a href="<?php echo base_url();?>auth/members">Profile &middot; <?php echo $username; ?></a></li>'
             <li><a href="<?php echo base_url();?>auth/loans">Request Loan</a></li>
-            <li><a href="<?php echo base_url();?>auth/members">Members</a></li>
+            <li><a href="<?php echo base_url();?>auth/all_members">Members</a></li>
             <li><a href="<?php echo base_url();?>auth/members">Downloads</a></li>
             <!-- /*committees dropdown*/ -->
             
