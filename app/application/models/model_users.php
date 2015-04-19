@@ -9,6 +9,7 @@ __ School of Computing and Informatics - UoN
  	/*
 	Get a specific field of a user
 	@params - > sting(table name), string(column), int(primary key)
+	@return object
  	*/
  	{
  		$details = $this->db->query("SELECT $column FROM members WHERE id_number = $unique_id");
@@ -24,6 +25,7 @@ __ School of Computing and Informatics - UoN
  	/*
 	Get a specific field of a user
 	@params - > sting(table name), string(column), int(primary key)
+	@return string/int (single value)
  	*/
  	{
  		$details = $this->db->query("SELECT $column FROM members WHERE id_number = $unique_id");

@@ -115,11 +115,15 @@ Authorised members function helpers only
 	*Loged in members area
 	*/
 	{
-		if($this->session->userdata('is_logged_in'))
+		$logged_in_id = $this->session->all_userdata()["id_number"];
+		if($this->session->userdata("is_logged_in"))
 		{
+			$f_name = $this->model_users->get_details('first_name', $logged_in_id);
+			$l_name = $this->model_users->get_details('surname', $logged_in_id);
+			$fullname = ucfirst($f_name).' '.ucfirst($l_name);
 			$data = array(
 					"auth" => "members",
-					"title" => "Naxxserian &middot; Members",
+					"title" => "Naxxserian &middot; ".$fullname,
 					"password_feedback" => ""
 				);
 			
@@ -192,7 +196,7 @@ Authorised members function helpers only
 
 						$data = array(
 								"auth" => "members",
-								"title" => "Naxxserian &middot; Members",
+								"title" => "Naxxserian &middot; members",
 								"password_feedback" => $success
 							);
 
@@ -205,7 +209,7 @@ Authorised members function helpers only
 
 						$data = array(
 								"auth" => "members",
-								"title" => "Naxxserian &middot; Members",
+								"title" => "Naxxserian &middot; members",
 								"password_feedback" => $success
 							);
 
@@ -220,7 +224,7 @@ Authorised members function helpers only
 
 						$data = array(
 								"auth" => "members",
-								"title" => "Naxxserian &middot; Members",
+								"title" => "Naxxserian &middot; members",
 								"password_feedback" => $success
 							);
 
@@ -232,7 +236,7 @@ Authorised members function helpers only
 			{
 				$data = array(
 						"auth" => "members",
-						"title" => "Naxxserian &middot; Members",
+						"title" => "Naxxserian &middot; members",
 						"password_feedback" => ""
 					);
 				$this->_load_view($data);
@@ -549,11 +553,11 @@ Authorised members function helpers only
 	{
 		$data = array(
 				"auth" => "all_members",
-				"title" => "Naxxserian &middot; Members"
+				"title" => "Naxxserian &middot; members"
 			);
 
 		$this->_load_view($data);
-		
+
 	}
 
 
