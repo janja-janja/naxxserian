@@ -19,6 +19,7 @@
 		<h4 class="btn btn-info">Signatories</h4>
 	</div>
 	<hr class="hrDividerBetween">
+	
 	<table class="table table-responsive table-hover table-stripped well">
 		<thead>
 			<td class="bold">Name</td>
