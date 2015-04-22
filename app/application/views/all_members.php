@@ -7,7 +7,8 @@
 	*/
 
 	#get all members
-	$all_members = $this->model_users->get_all_members();	 
+	$all_members = $this->model_users->get_all_members();
+	$logged_in_member = $this->session->all_userdata()["id_number"];	 
 
 
 ?>
@@ -37,12 +38,24 @@
 
 			$fullname = ucfirst($f_name).' '.ucfirst($m_name).' '.ucfirst($surname);
 
-			echo"
-				<tr id='".$id_number."' class='pointer'>
-					<td>".$fullname."</td>
-					<td>".$phone."</td>
-				</tr>
-			";
+			if($id_number == $logged_in_member)
+			{
+				echo"
+					<tr id='".$id_number."' class='pointer text text-success'>
+						<td>".$fullname." (Me)</td>
+						<td>".$phone."</td>
+					</tr>
+				";
+			}
+			else
+			{
+				echo"
+					<tr id='".$id_number."' class='pointer'>
+						<td>".$fullname."</td>
+						<td>".$phone."</td>
+					</tr>
+				";
+			}
 
 		}
 
