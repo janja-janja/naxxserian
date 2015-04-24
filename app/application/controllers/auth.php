@@ -557,7 +557,6 @@ Authorised members function helpers only
 			);
 		
 		$this->_load_view($data);
-
 	}
 
 
