@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 27, 2015 at 12:15 PM
+-- Generation Time: Apr 24, 2015 at 04:41 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -84,17 +84,21 @@ CREATE TABLE IF NOT EXISTS `loans` (
   `guarantor_id_number` int(8) NOT NULL,
   `amount` int(10) NOT NULL,
   `balance` int(10) NOT NULL,
-  `application_date` varchar(30) NOT NULL,
-  `amount_returnable` varchar(10) NOT NULL,
-  `monthly_date_due` varchar(13) NOT NULL,
-  `deadline` varchar(30) NOT NULL,
-  `loan_status` varchar(10) NOT NULL DEFAULT 'not paid',
-  `loan_verification` varchar(20) NOT NULL DEFAULT 'pending',
-  `repayment_date` varchar(30) NOT NULL,
+  `application_date` datetime NOT NULL,
+  `loan_status` int(1) NOT NULL DEFAULT '0' COMMENT '0==not_paid, 1==paid',
+  `loan_verification` int(1) NOT NULL DEFAULT '0' COMMENT '0==pending, 1== confirmed',
+  `repayment_period` int(3) NOT NULL COMMENT 'The number of months taken to fully repay the laon',
   PRIMARY KEY (`loan_id`),
   KEY `guarantor_id_number` (`guarantor_id_number`),
   KEY `loanee_id_number` (`loanee_id_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `loans`
+--
+
+INSERT INTO `loans` (`loan_id`, `loanee_id_number`, `guarantor_id_number`, `amount`, `balance`, `application_date`, `loan_status`, `loan_verification`, `repayment_period`) VALUES
+(3, 27414209, 28414209, 7500, 8250, '2015-04-07 12:11:53', 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -107,8 +111,9 @@ CREATE TABLE IF NOT EXISTS `members` (
   `middle_name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `id_number` int(8) NOT NULL,
+  `email_address` varchar(255) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
-  `password` varchar(40) NOT NULL DEFAULT '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',
+  `password` varchar(50) NOT NULL DEFAULT '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',
   `photo` varchar(300) NOT NULL DEFAULT 'naxxserian.default.photo.naxxserian.png',
   `registration_date` datetime NOT NULL,
   `category` varchar(20) NOT NULL DEFAULT 'member',
@@ -117,6 +122,16 @@ CREATE TABLE IF NOT EXISTS `members` (
   `loan_status` varchar(30) NOT NULL DEFAULT 'dormant' COMMENT 'dormant==has no loan pending, active==has a loan pending',
   PRIMARY KEY (`id_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='naxserian members table';
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`first_name`, `middle_name`, `surname`, `id_number`, `email_address`, `phone_number`, `password`, `photo`, `registration_date`, `category`, `type`, `status`, `loan_status`) VALUES
+('dominic', 'kimani', 'ruriga', 26414209, 'dominic.ruriga@ymail.com', '0722222222', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'naxxserian.default.photo.naxxserian.png', '2015-04-04 06:00:00', 'member', 'member', 1, 'dormant'),
+('denis', 'mburu', 'karanja', 27414209, 'dee.caranja@gmail.com', '0725332343', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '7f2832cc0cb8623775f76c403501aebb9406d9e1.jpg', '2015-03-26 12:28:00', 'member', 'member', 1, 'dormant'),
+('kenneth', 'muturi', 'kamande', 28414209, 'camande@ymail.com', '0721175890', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'naxxserian.default.photo.naxxserian.png', '2015-03-26 00:00:00', 'member', 'member', 1, 'dormant'),
+('manasseh', 'mwangi', 'muhia', 29414209, 'nassehma@gmail.com', '0725116661', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'naxxserian.default.photo.naxxserian.png', '2015-04-08 09:00:00', 'member', 'member', 1, 'dormant');
 
 -- --------------------------------------------------------
 
@@ -254,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `website_visitors` (
   `browser` varchar(255) NOT NULL DEFAULT 'web browser',
   `platform` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
-  `date_time` varchar(255) NOT NULL,
+  `date_time` datetime NOT NULL,
   PRIMARY KEY (`auto_id`),
   KEY `id_number` (`id_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='website visitors' AUTO_INCREMENT=1 ;
