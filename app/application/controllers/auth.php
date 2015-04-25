@@ -547,8 +547,6 @@ Authorised members function helpers only
 		}
 	}
 
-
-
 	public function all_members()
 	/*
 	Display all members of the chama
@@ -561,6 +559,36 @@ Authorised members function helpers only
 		
 		$this->_load_view($data);
 	}
+
+
+	public function financials()
+	/*
+	Get individual and chama financials
+	*/
+	{
+		$data = array(
+				"auth" => "finance",
+				"title" => "Finacials"
+			);
+
+		$this->_load_view($data);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }/*end of class Auth*/
