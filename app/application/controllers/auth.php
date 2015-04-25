@@ -14,6 +14,9 @@ Authorised members function helpers only
 	{
 		parent::__construct();
 
+		#default timezone
+		date_default_timezone_set("Africa/Nairobi");
+
 		#load models on startup
 		$this->load->model('model_users');
 		$this->load->model('loans_model');
