@@ -15,6 +15,8 @@ C->reate, R->ead, U->pdate, D->elete, L->
 		#default timezone
 		date_default_timezone_set("Africa/Nairobi");
 
+		#check if admin is logged in
+
 		#set default models here
 
 		#default data
@@ -25,7 +27,7 @@ C->reate, R->ead, U->pdate, D->elete, L->
 
 	public function __load_view($data)
 	{
-		$this->load->view("inc/admin_template", $data);
+		$this->load->view("inc/admin/admin_template", $data);
 	}
 
 	public function index()
