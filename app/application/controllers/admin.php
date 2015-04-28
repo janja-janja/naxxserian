@@ -36,6 +36,12 @@ C->reate, R->ead, U->pdate, D->elete, L->
 	*/
 	{
 		#load admin-login view
+		$data = array(
+				"admin" => "login",
+				"title" => "Naxxserian &middot; Admin Panel"
+			);
+
+		$this->__load_view($data);
 	}
 
 	public function admin_login()
