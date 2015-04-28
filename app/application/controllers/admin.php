@@ -38,12 +38,24 @@ C->reate, R->ead, U->pdate, D->elete, L->
 	*/
 	{
 		#load admin-login view
-		$data = array(
-				"admin" => "login",
-				"title" => "Naxxserian &middot; Admin Panel"
-			);
+		if(!$this->session->userdata("admin_is_logged_in"))
+		{
+				$data = array(
+					"admin" => "login",
+					"title" => "Naxxserian &middot; Admin Panel"
+				);
 
-		$this->__load_view($data);
+			$this->__load_view($data);
+		}
+		else
+		{
+				$data = array(
+					"admin" => "home",
+					"title" => "Home &middot; Admin Panel"
+				);
+
+			$this->__load_view($data);
+		}
 	}
 
 	public function login_validation()
@@ -128,12 +140,15 @@ C->reate, R->ead, U->pdate, D->elete, L->
 		}
 	}
 
-	public function admin_login()
+	public function home()
 	/*
 	Admin login helper
 	*/
 	{
-
+		$data = array(
+				"admin" => "home",
+				"title" => "Admin &middot; Home"
+			);
 	}
 
 	public function add_user()
