@@ -28,6 +28,22 @@ C->reate, R->ead, U->pdate, D->elete, L->
 		$this->load->view("inc/admin_template", $data);
 	}
 
+	public function index()
+	/*
+	Admin entry point
+	*/
+	{
+		#load admin-login view
+	}
+
+	public function admin_login()
+	/*
+	Admin login helper
+	*/
+	{
+
+	}
+
 	public function add_user()
 	/*
 	Allows admin to add a new user / member
