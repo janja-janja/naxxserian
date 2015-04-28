@@ -14,7 +14,7 @@ Holds admins(user) helper functions to assist admin roles
 	{
 		$condition = array(
 				"id_number" => $this->input->post("id_number"),
-				"password" => $this->input->post("password"),
+				"password" => sha1($this->input->post("password")),
 				"category" => $category
 			);
 
