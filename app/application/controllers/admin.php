@@ -117,7 +117,7 @@ C->reate, R->ead, U->pdate, D->elete, L->
 						"title" => "Naxxserian Admin &middot; Home"
 					);
 
-				$this->_load_view($data);
+				$this->__load_view($data);
 
 		}
 	}
