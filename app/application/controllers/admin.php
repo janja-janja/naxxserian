@@ -94,7 +94,13 @@ C->reate, R->ead, U->pdate, D->elete, L->
 						);
 
 					$this->session->set_userdata($data);
-					redirect('admin/home');
+
+					$data = array(
+							"admin" => "home",
+							"title" => "Admin Home Panel"
+						);
+
+					$this->__load_view($data);
 				
 			
 			}
@@ -149,6 +155,20 @@ C->reate, R->ead, U->pdate, D->elete, L->
 				"admin" => "home",
 				"title" => "Admin &middot; Home"
 			);
+	}
+
+	public function logout()
+	/*
+	end admin session
+	*/
+	{
+		$this->session->sess_destroy();
+		$data = array(
+				"admin" => "login",
+				"title" => "Naxxserian &middot; Login"
+			);
+
+		$this->__load_view($data);
 	}
 
 	public function add_user()

@@ -26,7 +26,6 @@ Authorised members function helpers only
 			);
 
 		!$this->session->userdata("is_logged_in") ? redirect("out/"): '';
-
 	}
 
 	public function _load_view($data){
@@ -39,7 +38,6 @@ Authorised members function helpers only
 		$this->home();
 		
 	}
-
 
 	public function home()
 	{
