@@ -179,4 +179,18 @@ C->reate, R->ead, U->pdate, D->elete, L->
 	{
 
 	}
+
+	public function login()
+	/*
+	login user
+	*/
+	{
+		$data = array(
+				"admin" => "login",
+				"title" => "Naxxserian &middot; Login"
+			);
+
+		$this->__load_view($data);
+	}
+
 }
