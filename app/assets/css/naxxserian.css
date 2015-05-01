@@ -45,6 +45,10 @@ body{
 .highlighter{
 	background-color: #F15725;
 }
+.highlighter-text{
+	color: #F15725;
+}
+
 li.active-inverse a.white{
 	color: #eaeaea;
 }
