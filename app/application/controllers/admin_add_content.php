@@ -5,6 +5,8 @@ class Admin_add_content extends CI_Controller
 Allow admin to add content to the members view page
 */
 {
+	private $data;
+
 	function __construct()
 	{
 		/*
@@ -16,11 +18,9 @@ Allow admin to add content to the members view page
 		date_default_timezone_set("Africa/Nairobi");
 
 		#check if admin is loggd in
-
+		!$this->session->userdata("admin_is_logged_in") ? redirect("admin/"): "";
 
 		#load models
-
-		#load view
 
 
 	}
@@ -29,4 +29,15 @@ Allow admin to add content to the members view page
 	{
 		$this->load->view("inc/admin/admin_template", $data);
 	}
+
+	public function index()
+	/*
+	Entry point
+	*/
+	{
+
+	}
+
+
+
 }
