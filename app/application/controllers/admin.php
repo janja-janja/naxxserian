@@ -171,15 +171,6 @@ C->reate, R->ead, U->pdate, D->elete, L->
 		$this->__load_view($data);
 	}
 
-	public function add_user()
-	/*
-	Allows admin to add a new user / member
-	@return boolean
-	*/
-	{
-
-	}
-
 	public function login()
 	/*
 	login user

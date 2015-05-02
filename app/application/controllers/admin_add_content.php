@@ -38,6 +38,31 @@ Allow admin to add content to the members view page
 
 	}
 
+	public function contributions()
+	/*
+	Allow admin to add contributions for members
+	*/
+	{
+		$data = array(
+				"admin" => "add_contribution",
+				"title" => "Add Contributions"
+			);
+
+		$this->__load_view($data);
+	}
+
+	public function add_user()
+	/*
+	Allows admin to add a new user / member
+	*/
+	{
+		$data = array(
+				"admin" => "add_user",
+				"title" => "Add User"
+			);
+
+		$this->__load_view($data);
+	}
 
 
 }
