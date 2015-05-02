@@ -56,8 +56,8 @@
             $username = $this->session->userdata("username");
             ?>
 
-            <li><a href="<?php echo base_url();?>admin/">Add Member</a></li>
-            <li><a href="<?php echo base_url();?>admin/">Add Contributions</a></li>
+            <li><a href="<?php echo base_url();?>admin_add_content/add_user">Add Member</a></li>
+            <li><a href="<?php echo base_url();?>admin_add_content/contributions">Add Contributions</a></li>
             <li><a href="<?php echo base_url();?>admin/">Financials</a></li>
             <li><a href="<?php echo base_url();?>admin/">Members</a></li>
             <li><a href="<?php echo base_url();?>admin/">Downloads</a></li>
