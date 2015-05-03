@@ -35,7 +35,7 @@ Allow admin to add content to the members view page
 	Entry point
 	*/
 	{
-
+		$this->contributions();
 	}
 
 	public function contributions()
