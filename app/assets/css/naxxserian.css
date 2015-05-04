@@ -80,3 +80,11 @@ li.active-inverse a.white:hover{
 .bold{
 	font-weight: bold;
 }
+
+.form input[type=text].half,
+.form input[type=password].half,
+.form label.half,
+.form select.half{
+	width:43%;
+	margin-right: 4%;
+}
