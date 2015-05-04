@@ -64,5 +64,16 @@ Allow admin to add content to the members view page
 		$this->__load_view($data);
 	}
 
+	public function submit($what)
+	/*
+	Submit details to relevant models
+	*/
+	{
+		if($what == "add_user")
+		{
+			echo "YESSSSS";
+		}
+	}
+
 
 }

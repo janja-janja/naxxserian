@@ -6,7 +6,7 @@
 		<h4 class="col-md-3 btn btn-danger">Delete Member</h4>
 	</div>
 	<br><br><br>
-	<form method="POST" class="well col-md-10 col-md-offset-1" action="<?php echo base_url(); ?>admin_add_content/submit">
+	<form method="POST" class="well col-md-10 col-md-offset-1" action="<?php echo base_url(); ?>admin_add_content/submit/add_user">
 
       <h4 class="highlighter-text">Member details</h4>
       <hr class="hrDividerBetween">
